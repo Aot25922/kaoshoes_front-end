@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  web:
+    container_name: node.js
+    build: .
+    image: bom2321/project1_front-end
+    volumes:
+      - .:/src
+    command: npm run serve  
+    ports:
+      - "80:8080"
+    environment:
+      NODE_ENV: development
+      DEBUG: nodejs-docker-express:*
