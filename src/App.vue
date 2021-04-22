@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2 bg-helio-dark">
+  <div class="w-screen h-screen p-2 bg-helio-dark">
     <div class="navBar">
       <router-link to="/" class="navButton">Home</router-link>
       <router-link to="/Property" class="navButton">Edit</router-link>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-helio-dark">
+  <div>
     
   </div>
 </template>
