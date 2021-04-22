@@ -9,3 +9,5 @@ RUN npm instal
 RUN npm install -g npm@7.10.0
 
 COPY . .
+
+CMD [ "npm", "run serve" ]
