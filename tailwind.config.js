@@ -15,15 +15,8 @@ module.exports = {
         }
       }
     },
-    backgroundColor: theme => ({
-      ...theme('colors'),
-      'primary': '#22223B',
-    }),
   },
   variants: {
-    extend: {
-      backgroundColor: ['active'],
-    },
   },
   plugins: [],
 }
