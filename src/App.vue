@@ -18,4 +18,8 @@ export default {
 body {
   background-color: #9A8C98;
 }
+
+#app{
+  overflow-x: hidden;
+}
 </style>

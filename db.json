@@ -1,0 +1,56 @@
+{
+    "size": [
+        {
+            "size_id": 1,
+            "size_name": "1/700"
+        },
+        {
+            "size_id": 2,
+            "size_name": "1/350"
+        }
+    ],
+    "brands": [
+        {
+            "brand_id": 1,
+            "brand_name": "JPN"
+        },
+        {
+            "brand_id": 2,
+            "brand_name": "HSS"
+        }
+    ],
+    "brandSize": [
+        {
+            "brand_id": 1,
+            "size_id": 1
+        },
+        {
+            "brand_id": 1,
+            "size_id": 2
+        },
+        {
+            "brand_id": 2,
+            "size_id": 1
+        }
+    ],
+    "productList": [
+        {
+            "id": 1,
+            "name": "Japanese Battleship Yamato",
+            "description": "Length: 375mm. Image shows assembled and painted kit. This is an assembly kit of the Yamato, a Japanese Navy battleship completed in December 1941 with a 64,000 ton displacement, nine 46cm guns which had a 41km firing range, and a host of other revolutionary features. Tamiya has recreated the Yamato in her final form, as she headed towards Okinawa on her final sortie. The flare of the bow and the armor belts along her sides have been accurately reproduced, along with her main turrets, secondary 15.5cm gun turrets, and anti-aircraft armament including 12.7cm gun mounts. Parts are also included to depict rangefinders, radars, and cranes to enable a detailed finish.",
+            "price": 2400,
+            "date": "23-4-1989",
+            "img": "https://www.tamiya.com/english/products/31113/top.jpg",
+            "brand_id": 1
+        },
+        {
+            "id": 2,
+            "name": "British Battleship King George V",
+            "description": "Length: 322mm. Image shows assembled and painted kit. This is an assembly kit of the King George V, a 35,000 ton battleship completed in October 1940. She took part in the sinking of the German battleship Bismarck with the HMS Rodney in May 1941, and was active in the Pacific during the latter half of the war, including bombarding Japan's home islands. The model depicts the ship as she appeared during these operations against Japan, with additional radar and anti-aircraft armament. The funnel, bridge, and deck areas all feature realistic details.",
+            "price": 2200,
+            "date": "23-4-1986",
+            "img": "https://www.tamiya.com/english/products/77525/top.jpg",
+            "brand_id": 2
+        }
+    ]
+}
