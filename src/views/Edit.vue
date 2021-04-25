@@ -1,11 +1,16 @@
 <template>
-  <div class="h-96 bg-black">
+  <div class="">
+    <product-list :isEdit="true"/>
   </div>
 </template>
 
 <script>
+import ProductList from "../components/ProductList.vue";
 export default {
-name: "Edit"
+name: "Edit",
+  components: {
+    ProductList,
+  },
 }
 </script>
 

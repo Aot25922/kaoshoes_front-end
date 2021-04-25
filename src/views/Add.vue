@@ -1,11 +1,16 @@
 <template>
-  <div class="h-96 bg-black">
+  <div class="">
+    <product-form/>
   </div>
 </template>
 
 <script>
+import productForm from '../components/Form.vue'
 export default {
-name: "Add"
+name: "Add",
+  components: {
+    productForm,
+  },
 }
 </script>
 
