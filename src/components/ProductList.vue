@@ -1,9 +1,9 @@
 <template>
   <div id="productList" class="p-5">
-    <div class="productBox">
-      <div v-for="product in productList" :key="product.id">
-        <img class="w-1/4 h-auto text-center bg-gray-500" v-blind:src="product.img" />
-        <div class="w-3/4">
+
+      <div v-for="product in productList" :key="product.id" class="bg-white my-5">
+        <!--Error at image because it undefined-->
+        <img class="w-1/4 h-auto text-center bg-gray-500" src="sfsf" alt="Image here"/> 
           <div class="flex flex-col text-left ml-2 text-3xl">
             <p>
               Product Name: <span> {{ product.name }}</span>
@@ -16,9 +16,7 @@
             </p>
             <p>Price: <span>{{ product.price }}</span></p>
           </div>
-        </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -44,8 +42,8 @@ export default {
   },
   async created() {
     this.productList = await this.getProductResult();
-  },
-};
+  }
+}
 </script>
 
 <style scoped>
