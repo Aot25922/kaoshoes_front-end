@@ -6,7 +6,7 @@ COPY package.json package.json
 COPY package-lock.json package-lock.json
 
 RUN npm instal
-RUN npm install -g npm@7.10.0
+RUN npm install -g npm@7.11.1
 
 COPY . .
 
