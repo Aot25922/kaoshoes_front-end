@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+
+  mysql-server:
+    container_name: int221-mysql
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: kaofood
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - '3306:3306'
+    networks:
+        - int221-network
+    
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8081:81'
+    restart: always
+    networks:
+        - int221-network
+
+networks:
+    int221-network:
+        driver: bridge
