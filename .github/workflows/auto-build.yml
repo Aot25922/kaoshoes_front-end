@@ -1,10 +1,11 @@
 name: hello-world
 on: [push]
 jobs:
-  print-hello-world:
-    runs-on: ubuntu-20.04
+  deploy-dev:
+    runs-on: ubuntu-18.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - run: echo "Hello World"
-      - run: ls -l
+      - run: docker build -t ghcr.io/int221-31-33-43/project1_kaofood:latest .
+      - run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - run: docker push ghcr.io/int221-31-33-43/project1_kaofood:latest
