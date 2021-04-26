@@ -1,8 +1,24 @@
-# frontend
-Use port 8080
-# backend
-Use port 8081
+# project1_front-end
 
-# build jar in backend
-JAVA_HOME="C:\Program Files\Java\jdk-16\bin"
-mvnw package
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

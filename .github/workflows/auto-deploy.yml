@@ -1,7 +1,7 @@
-name: hello-world
+name: auto-deploy
 on: [push]
 jobs:
-  deploy-dev:
+  deploy-frontend:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
@@ -16,4 +16,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/int221-31-33-43/project1_kaofood:latest
+          tags: ghcr.io/int221-31-33-43/kaofood_front-end:latest
