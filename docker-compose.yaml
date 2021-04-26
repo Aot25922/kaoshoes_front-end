@@ -16,9 +16,8 @@ services:
 
   frontend:
     container_name: int221-node.js
-    build:
-      context: ./front-end
-      dockerfile: Dockerfile
+    build: ./front-end
+    image: ghcr.io/int221-31-33-43/project1_kaofood:latest
     ports:
       - "80:8080"
     restart: always
@@ -27,9 +26,8 @@ services:
     
   backend:
     container_name: int221-spring
-    build:
-      context: ./back-end
-      dockerfile: Dockerfile
+    build: ./back-end
+    image: ghcr.io/int221-31-33-43/project1_kaofood:latest
     ports:
       - '8081:8081'
     restart: always
