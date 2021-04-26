@@ -13,13 +13,25 @@ services:
       - '3306:3306'
     networks:
         - int221-network
-    
-  backend:
+
+  frontend:
+    container_name: int221-node.js
     build:
-      context: .
+      context: ./front-end
       dockerfile: Dockerfile
     ports:
-      - '8081:81'
+      - "80:8080"
+    restart: always
+    networks:
+      - int221-network
+    
+  backend:
+    container_name: int221-spring
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8081'
     restart: always
     networks:
         - int221-network
