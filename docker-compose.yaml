@@ -16,7 +16,7 @@ services:
 
   frontend:
     container_name: int221-node.js
-    build: ./front-end
+    build: .
     image: ghcr.io/int221-31-33-43/project1_kaofood:latest
     ports:
       - "80:8080"
@@ -26,7 +26,7 @@ services:
     
   backend:
     container_name: int221-spring
-    build: ./back-end
+    build: .
     image: ghcr.io/int221-31-33-43/project1_kaofood:latest
     ports:
       - '8081:8081'
