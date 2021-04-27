@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="edit" class="">
     <show-product :isEdit="true"/>
   </div>
 </template>
