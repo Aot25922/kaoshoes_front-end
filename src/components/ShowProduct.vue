@@ -1,5 +1,5 @@
 <template>
-  <div id="productList" class="p-5">
+  <div id="showProduct" class="p-5">
     <div
       v-for="product in productList"
       :key="product.id"
@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: "ProductList",
+  name: "ShowProduct",
   emits: ["edit-data", "delete-data"],
   props: {
     isEdit: Boolean,

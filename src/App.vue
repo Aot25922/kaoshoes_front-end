@@ -6,7 +6,7 @@
       <router-link to="/Team" class="navButton">About Us</router-link>
     </div>
   </div>
-  <router-view />
+  <router-view/>
 </template>
 <script>
 export default {

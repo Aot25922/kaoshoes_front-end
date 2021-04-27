@@ -1,15 +1,15 @@
 <template>
   <div class="">
-    <product-list :isEdit="true"/>
+    <show-product :isEdit="true"/>
   </div>
 </template>
 
 <script>
-import ProductList from "../components/ProductList.vue";
+import ShowProduct from "../components/ShowProduct.vue";
 export default {
 name: "Edit",
   components: {
-    ProductList,
+    ShowProduct,
   },
 }
 </script>
