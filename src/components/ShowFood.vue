@@ -5,8 +5,8 @@
 </template>
 <script>
 export default {
-    name: "ShowProduct",
-    methods:(){
+    name: "ShowFood",
+    methods:{
         goBack(){
             return this.$router.go(-1);
         }

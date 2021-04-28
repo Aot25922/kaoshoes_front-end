@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 .navBar{
-    @apply flex flex-row text-3xl font-semibold p-4 bg-cadet-dark text-white rounded-md
+    @apply flex flex-row text-3xl font-semibold  bg-cadet-dark text-white rounded-md
 }
 
 .navButton {
-    @apply w-1/6 hover:bg-white hover:text-black text-center
+    @apply w-1/6 hover:bg-white hover:text-black text-center p-4 rounded
 }
 
 .productBox {
