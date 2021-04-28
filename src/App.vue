@@ -1,16 +1,10 @@
 <template>
   <div id="app" class="p-5">
     <div class="navBar">
-      <div class="navButton">
-        <router-link to="/" >Home</router-link>
+        <router-link to="/" class="navButton md:flex-shrink-0">Home</router-link>
+        <router-link to="/Property" class="navButton md:flex-shrink-0 ">Edit</router-link>
+        <router-link to="/Team" class="navButton  md:flex-shrink-0">About Us</router-link>
       </div>
-      <div class="navButton">
-        <router-link to="/Property" >Edit</router-link>
-      </div>
-      <div class="navButton">
-        <router-link to="/Team" >About Us</router-link>
-      </div>
-    </div>
   </div>
   <router-view />
 </template>
