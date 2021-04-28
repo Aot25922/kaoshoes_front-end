@@ -1,15 +1,15 @@
 <template>
   <div id="edit" class="">
-    <show-product :isEdit="true"/>
+    <show-food :isEdit="true"/>
   </div>
 </template>
 
 <script>
-import ShowProduct from "../components/ShowProduct.vue";
+import ShowFood from "../components/ShowFood.vue";
 export default {
 name: "Edit",
   components: {
-    ShowProduct,
+    ShowFood,
   },
 }
 </script>
