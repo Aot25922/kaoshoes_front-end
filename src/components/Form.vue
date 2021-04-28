@@ -68,20 +68,19 @@
           <label for="category">Category</label>
           <div class="">
             <select id="category" class="" name="category">
-              <option>Main Course</option>
-              <option>Beverage</option>
-              <option>Dessert</option>
+              <option value="1">Main Course</option>
+              <option value="2">Beverage</option>
+              <option value="3">Dessert</option>
             </select>
           </div>
         </div>
         <div class="w-1/2 flex flex-col">
-          <label for="size">Size</label>
-          <div class="">
-            <select id="size" class="" name="size">
-              <option value="M">Medium</option>
-              <option value="L">Large</option>
-            </select>
-          </div>
+          <input type="checkbox" id="size1" name="size" value="{1,'xl'}">
+          <label for="size1">xl</label>
+          <input type="checkbox" id="size1" name="size" value="{2,'l'}">
+          <label for="size1">l</label>
+          <input type="checkbox" id="size1" name="size" value="{3,'s'}">
+          <label for="size1">s</label>
         </div>
       </div>
       <div class="flex justify-end w-full space-x-5">
@@ -106,7 +105,15 @@ export default {
     colors: null,
   },
   data() {
-    return {};
+    return {
+      Menuname:'',
+      date:'',
+      Descript:'',
+      Costl:0,
+      Image_Path:'',
+      category_cateid: 1,
+      mysize:{}
+    };
   },
 };
 </script>

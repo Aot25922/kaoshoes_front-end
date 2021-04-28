@@ -33,11 +33,12 @@
           <p class="text-left w-2/3">{{ food.name }}</p>
           <p class="text-right w-1/3">{{ food.price }}฿</p>
         </div>
-        <p class="text-gray-500 text-sm break-all mb-5 des-text">
+        <p class="text-gray-500 text-sm break-all  des-text">
           {{ food.description }}
         </p>
+        <div class='flex justify-end mt-2 hover:opacity-50'>
         <button
-          class="bottom-1 right-6 absolute hover:opacity-50"
+          class=""
           @click="$emit('delete-data', food)"
           v-if="isEdit"
         >
@@ -54,6 +55,7 @@
             />
           </svg>
         </button>
+        </div>
       </div>
     </div>
   </div>
@@ -81,6 +83,9 @@ export default {
         console.log(`Counld not get! ${error}`);
       }
     },
+    async reload(){
+      this.foodList = await this.getProductResult();
+    }
   },
   async created() {
     this.foodList = await this.getProductResult();
