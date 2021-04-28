@@ -86,11 +86,13 @@
       </div>
       <div class="flex justify-end w-full space-x-5">
         <button
-          class="bg-green-500 text-3xl font-bold py-5 px-8 hover:bg-green-light rounded-lg "
+          class="bg-green-500 text-3xl font-bold py-5 px-8 hover:bg-green-light rounded-lg"
         >
           Add
         </button>
-        <button class="bg-red text-3xl font-bold py-5 px-8 hover:bg-red-salsa rounded-lg">
+        <button
+          class="bg-red text-3xl font-bold py-5 px-8 hover:bg-red-salsa rounded-lg"
+        >
           Cancel
         </button>
       </div>
@@ -123,6 +125,10 @@ textarea {
   padding: 2%;
 }
 button {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+option {
+  padding: 1%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 </style>

@@ -1,14 +1,14 @@
 <template>
   <div class="grid grid-cols-4 filter drop-shadow-lg">
-    <div class="px-2" v-for="food in foodList" :key="food.id">
+    <div class="px-2 pb-4" v-for="food in foodList" :key="food.id">
       <div
         class="bg-white col-span-1 p-5 text-lg font-medium h-full rounded-md drop-shadow-xl relative"
       >
-        <div class="relative">
-          <img :src="food.img" class="" />
+        <div class="relative ">
+          <img :src="food.img" class="rounded" />
           <span
             class="absolute bottom-0 right-0 bg-cadet-dark text-white p-2 rounded"
-            >Size</span
+            >{{ food.size }}</span
           >
           <button
             class="absolute -top-2 -right-2 hover:opacity-50"
@@ -33,7 +33,7 @@
           <p class="text-left w-2/3">{{ food.name }}</p>
           <p class="text-right w-1/3">{{ food.price }}฿</p>
         </div>
-        <p class="text-gray-500 text-sm break-all mb-5">
+        <p class="text-gray-500 text-sm break-all mb-5 h- overflow-hidden overflow-ellipsis">
           {{ food.description }}
         </p>
         <button
