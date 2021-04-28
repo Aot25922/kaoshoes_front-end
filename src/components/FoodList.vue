@@ -13,6 +13,7 @@
           <button
             class="absolute -top-2 -right-2 hover:opacity-50"
             @click="$emit('edit-data', food)"
+            v-if="isEdit"
           >
             <svg
               width="50"
@@ -38,6 +39,7 @@
         <button
           class="bottom-1 right-6 absolute hover:opacity-50"
           @click="$emit('delete-data', food)"
+          v-if="isEdit"
         >
           <svg
             width="33"

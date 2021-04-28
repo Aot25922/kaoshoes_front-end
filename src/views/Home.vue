@@ -5,7 +5,7 @@
       <div class="navCate mx-auto">Beverage</div>
       <div class="navCate mr-auto">Dessert</div>
     </div>
-      <food-list/>
+      <food-list :isEdit='false' />
     <!-- <show-product> </show-product> -->
   </div>
 </template>

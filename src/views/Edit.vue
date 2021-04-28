@@ -1,6 +1,6 @@
 <template>
   <div id="edit" class="">
-    <food-list @edit-data='editData' @delete-data='deleteData' />
+    <food-list @edit-data='editData' @delete-data='deleteData' :isEdit='true' />
   </div>
 </template>
 
