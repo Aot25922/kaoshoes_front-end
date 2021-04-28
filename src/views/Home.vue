@@ -11,7 +11,6 @@
 </template>
 
 <script>
-// import ShowProduct from "../components/ShowProduct.vue";
 import FoodList from '../components/FoodList.vue';
 
 export default {

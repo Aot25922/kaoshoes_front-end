@@ -10,7 +10,10 @@
             class="absolute bottom-0 right-0 bg-cadet-dark text-white p-2 rounded"
             >Size</span
           >
-          <button class="absolute -top-2 -right-2 hover:opacity-50 " @click="$emit('edit-data', food)">
+          <button
+            class="absolute -top-2 -right-2 hover:opacity-50"
+            @click="$emit('edit-data', food)"
+          >
             <svg
               width="50"
               height="49"
@@ -29,8 +32,13 @@
           <p class="text-left w-2/3">{{ food.name }}</p>
           <p class="text-right w-1/3">{{ food.price }}</p>
         </div>
-        <p class="text-gray-500 text-sm break-all mb-5">{{ food.description }}</p>
-        <button class="bottom-1 right-6 absolute hover:opacity-50" @click="$emit('delete-data', food)">
+        <p class="text-gray-500 text-sm break-all mb-5">
+          {{ food.description }}
+        </p>
+        <button
+          class="bottom-1 right-6 absolute hover:opacity-50"
+          @click="$emit('delete-data', food)"
+        >
           <svg
             width="33"
             height="37"
@@ -51,14 +59,14 @@
 <script>
 export default {
   name: "FoodList",
-    emits: ["edit-data", "delete-data"],
+  emits: ["edit-data", "delete-data"],
   props: {
     isEdit: Boolean,
   },
   data() {
     return {
       foodList: [],
-      url: "http://localhost:5000/productList",
+      url: "http://localhost:5000/foodList",
     };
   },
   methods: {

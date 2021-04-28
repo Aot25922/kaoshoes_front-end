@@ -6,6 +6,7 @@
 
 <script>
 import FoodList from "../components/FoodList.vue";
+
 export default {
 name: "Edit",
   components: {
