@@ -42,17 +42,17 @@
         </div>
       </div>
     </div>
-    <show-product> </show-product>
+    <product-list></product-list>
   </div>
 </template>
 
 <script>
-import ShowProduct from "../components/ShowProduct.vue";
+import ProductList from "../components/ProductList.vue";
 
 export default {
   name: "Home",
   components: {
-    ShowProduct,
+    ProductList,
   },
   methods: {
     currentCategory() {},
