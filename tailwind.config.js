@@ -14,7 +14,11 @@ module.exports = {
           light: "#F2E9E4"
         },
         red: {
-          salsa : "#F87060"
+          salsa : "#F87060",
+          DEFAULT: "#FF4040"
+        },
+        green:{
+          light: "#56E39F"
         }
       }
     },

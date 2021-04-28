@@ -1,42 +1,125 @@
 <template>
-  <div>
-    <form>
-      <label for="name">Product Name</label>
-      <input type="text" id="name" name="name" />
-      <label for="Mdate">Manufacturer Date</label>
-      <input type="Date" id="MDate" name="date" />
-      <label for="Des">Product Description</label>
-      <input type="text" id="Des" name="Des" />
-      <label for="price">price</label>
-      <input type="number" name="price" />
-      <label for="Brand">Brand</label>
-      <div class="">
-        <select id="Brand" class="" name="brand">
-          <option>Indiana</option>
-          <option>Michigan</option>
-          <option>Ohio</option>
-        </select>
+  <div id="form" class="p-5">
+    <form
+      @submit.prevent="submitForm"
+      class="bg-helio-light p-7 flex flex-wrap rounded-md space-y-2"
+    >
+      <div class="w-full flex">
+        <div class="w-1/2 flex flex-col">
+          <label for="name">Product Name</label>
+          <input
+            style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
+            class="w-11/12"
+            type="text"
+            id="Menuname"
+            name="Menuname"
+          />
+        </div>
+        <div class="w-1/2 flex flex-col">
+          <label for="Mdate">Manufacturer Date</label>
+          <input
+            style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
+            class="w-1/3"
+            type="Date"
+            id="MDate"
+            name="date"
+          />
+        </div>
       </div>
-      <img alt="Image here" />
-      <input type="file" name="img" />
-      <!-- <div v-for="color in colors" :key="colorId">
+
+      <div class="w-full flex flex-col">
+        <label for="Des">Product Description</label>
+        <textarea
+          type="text"
+          id="Descript"
+          name="Descript"
+          placeholder="Please insert description..."
+        >
+        </textarea>
+      </div>
+      <div class="w-1/2 flex flex-col">
+        <label for="cost">Cost</label>
+        <input
+          style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
+          class="w-11/12"
+          type="number"
+          name="Costl"
+        />
+      </div>
+      <div class="w-1/2 flex flex-col">
+        <label for="price">Price</label>
+        <input
+          style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
+          class="w-11/12"
+          type="number"
+          name="price"
+        />
+      </div>
+      <div class="w-1/2">
+        <img alt="Image here" />
+        <input type="file" name="img" />
+        <!-- <div v-for="color in colors" :key="colorId">
         <input type="checkbox" id="vehicle1" name="color.name + 'color.id'" value="Bike" />
         <label for="color.name+'color.id'"> {{color.name}}</label><br />
       </div> -->
-      <button>Add</button>
+      </div>
+      <div class="w-1/2">
+        <div class="w-1/2 flex flex-col">
+          <label for="category">Category</label>
+          <div class="">
+            <select id="category" class="" name="category">
+              <option>Main Course</option>
+              <option>Beverage</option>
+              <option>Dessert</option>
+            </select>
+          </div>
+        </div>
+        <div class="w-1/2 flex flex-col">
+          <label for="size">Size</label>
+          <div class="">
+            <select id="size" class="" name="size">
+              <option value="M">Medium</option>
+              <option value="L">Large</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <button
+          class="bg-green-500 text-3xl font-bold p-5 hover:bg-green-light"
+        >
+          Add
+        </button>
+        <button class="bg-red text-3xl font-bold p-5 hover:bg-red-salsa">
+          Cancel
+        </button>
+      </div>
     </form>
   </div>
 </template>
 <script>
 export default {
   name: "Form",
-  props:{
-      colors:null
+  props: {
+    colors: null,
   },
-  data(){
-      return {
-
-      }
-  }
+  data() {
+    return {};
+  },
 };
 </script>
+
+<style scoped>
+label {
+  font-size: xx-large;
+  font-weight: 600;
+}
+input {
+  border: black;
+  padding: 1%;
+}
+textarea {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 2%;
+}
+</style>
