@@ -1,13 +1,11 @@
 <template>
   <div id="home" class="p-5">
     <div class="flex flex-wrap mb-10">
-      <div class="navCate ml-auto">Main Menu</div>
+      <div class="navCate ml-auto ">Main Menu</div>
       <div class="navCate mx-auto">Beverage</div>
       <div class="navCate mr-auto">Dessert</div>
     </div>
-    <div class="grid grid-cols-4 filter drop-shadow-lg">
       <food-list/>
-    </div>
     <!-- <show-product> </show-product> -->
   </div>
 </template>
