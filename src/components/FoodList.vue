@@ -4,7 +4,7 @@
       <div
         class="bg-white col-span-1 p-5 text-lg font-medium h-full rounded-md drop-shadow-xl relative"
       >
-        <div class="relative ">
+        <div class="relative">
           <img :src="food.img" class="rounded" />
           <span
             class="absolute bottom-0 right-0 bg-cadet-dark text-white p-2 rounded"
@@ -33,7 +33,7 @@
           <p class="text-left w-2/3">{{ food.name }}</p>
           <p class="text-right w-1/3">{{ food.price }}฿</p>
         </div>
-        <p class="text-gray-500 text-sm break-all mb-5 h- overflow-hidden overflow-ellipsis">
+        <p class="text-gray-500 text-sm break-all mb-5 des-text">
           {{ food.description }}
         </p>
         <button
@@ -88,3 +88,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.des-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
