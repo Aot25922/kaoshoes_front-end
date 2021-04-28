@@ -30,7 +30,7 @@
         </div>
         <div class="flex flex-wrap pt-1">
           <p class="text-left w-2/3">{{ food.name }}</p>
-          <p class="text-right w-1/3">{{ food.price }}</p>
+          <p class="text-right w-1/3">{{ food.price }}฿</p>
         </div>
         <p class="text-gray-500 text-sm break-all mb-5">
           {{ food.description }}
