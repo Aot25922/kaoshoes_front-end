@@ -84,13 +84,13 @@
           </div>
         </div>
       </div>
-      <div class="">
+      <div class="flex justify-end w-full space-x-5">
         <button
-          class="bg-green-500 text-3xl font-bold p-5 hover:bg-green-light"
+          class="bg-green-500 text-3xl font-bold py-5 px-8 hover:bg-green-light rounded-lg "
         >
           Add
         </button>
-        <button class="bg-red text-3xl font-bold p-5 hover:bg-red-salsa">
+        <button class="bg-red text-3xl font-bold py-5 px-8 hover:bg-red-salsa rounded-lg">
           Cancel
         </button>
       </div>
