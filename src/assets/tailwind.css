@@ -17,9 +17,9 @@
 }
 
 .navEdit {
-    @apply md:text-4xl  font-bold   sm:w-1/2 md:text-center hover:bg-red-salsa md:p-3 md:px-8
+    @apply md:text-4xl font-bold sm:w-1/2 md:text-center hover:bg-red-salsa md:p-3 md:px-8
 }
 
 .navCate{
-    @apply bg-white md:text-2xl font-bold text-black sm:w-1/4 md:text-center md:p-2 md:rounded-md 
+    @apply bg-white md:text-2xl font-bold text-black sm:w-1/4 md:text-center md:p-2 md:rounded-md md:mx-auto cursor-pointer
 }
