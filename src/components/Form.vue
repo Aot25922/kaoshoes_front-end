@@ -1,9 +1,9 @@
 <template>
   <div id="form" class="md:p-5">
     <form
-      @submit.prevent="submitForm"
-      class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2"
-    >
+      action="http://localhost:8080/menu/add"
+      class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2">
+
       <div class="md:w-full flex">
         <div class="md:w-1/2 flex flex-col">
           <label for="name">Product Name</label>
@@ -13,6 +13,7 @@
             type="text"
             id="Menuname"
             name="Menuname"
+            v-model="Menuname"
           />
         </div>
         <div class="md:w-1/2 flex flex-col">
@@ -23,6 +24,7 @@
             type="Date"
             id="MDate"
             name="date"
+            v-model="date"
           />
         </div>
       </div>
@@ -34,6 +36,7 @@
           id="Descript"
           name="Descript"
           placeholder="Please insert description..."
+          v-model="Descript"
         >
         </textarea>
       </div>
@@ -43,7 +46,8 @@
           style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
           class="w-11/12"
           type="number"
-          name="cost"
+          name="Costl"
+          v-model="Costl"
         />
       </div>
       <div class="md:w-1/2 flex flex-col">
@@ -53,6 +57,7 @@
           class="md:w-11/12"
           type="number"
           name="price"
+          v-model="price"
         />
       </div>
       <div class="md:w-1/2">
@@ -67,26 +72,18 @@
         <div class="md:w-1/2 flex flex-col">
           <label for="category">Category</label>
           <div class="md:p-3 md:text-lg">
-            <select id="category" class="" name="category">
-              <option value="1">Main Course</option>
-              <option value="2">Beverage</option>
-              <option value="3">Dessert</option>
+            <select id="category" class="" name="category" v-model="category">
+              <option disabled value="">Please select one</option>
+              <option :value="category" v-for="category in CategoryList" :key="category.id">{{category.cateName}}</option>
             </select>
           </div>
         </div>
         <div class="md:w-1/2 flex flex-col">
-          <h3 class="checkbox-inline">
-            <input class="md:mr-1" type="checkbox" id="size1" name="size" value="{1,'xl'}"/>Extra Large (XL)
-          </h3>
-          <h3 class="checkbox-inline">
-            <input class="mr-1" type="checkbox" id="size1" name="size" value="{2,'l'}"/>Large (L)
-          </h3>
-          <h3 class="checkbox-inline">
-            <input class="md:mr-1" type="checkbox" id="size1" name="size" value="{3,'m'}"/>Medium (M)
-          </h3>
-          <h3 class="checkbox-inline">
-            <input class="md:mr-1" type="checkbox" id="size1" name="size" value="{4,'s'}"/>Small (S)
-          </h3>
+        <div v-for="size in SizeList" :key="size.id">
+          <label class="checkbox-inline">
+          <input type="checkbox" :id="size.id" name="size" :value="size" v-model="mysize"> {{size.size}}
+          </label>
+        </div>
         </div>
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
@@ -110,6 +107,7 @@ export default {
   props: {
     colors: null,
   },
+  inject:["categoryurl","sizeurl"],
   data() {
     return {
       Menuname: "",
@@ -118,9 +116,36 @@ export default {
       Costl: 0,
       Image_Path: "",
       category_cateid: 1,
-      mysize: {},
+      mysize:[],
+      CategoryList:[],
+      SizeList:[]
     };
   },
+  methods:{
+    async getCategoryResult() {
+      try {
+        const res = await fetch(this.categoryurl);
+        const data = res.json();
+        return data;
+      } catch (error) {
+        console.log(`Counld not get! ${error}`);
+      }
+    },
+    async getSizeResult() {
+      try {
+        const res = await fetch(this.sizeurl);
+        const data = res.json();
+        return data;
+      } catch (error) {
+        console.log(`Counld not get! ${error}`);
+      }
+    }
+  },
+
+  async created(){
+    this.CategoryList= await this.getCategoryResult()
+    this.SizeList = await this.getSizeResult()
+  }
 };
 </script>
 

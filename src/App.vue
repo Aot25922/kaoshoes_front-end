@@ -11,6 +11,18 @@
 <script>
 export default {
   name: "App",
+    provide(){
+    return{
+     categoryurl:this.categoryurl,
+     sizeurl:this.sizeurl
+    }
+    },
+  data(){
+    return {
+      categoryurl : "http://localhost:8080/category",
+      sizeurl : "http://localhost:8080/size"
+    }
+  }
 };
 </script>
 
