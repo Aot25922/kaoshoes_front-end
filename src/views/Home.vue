@@ -1,7 +1,7 @@
 <template>
   <div id="home" class="p-5">
-    <cate-food/>
-    <menu-list/>
+    <cate-food @SelectCate="selectCate"/>
+    <menu-list :menuList="menuFilterList"/>
   </div>
 </template>
 <script>
@@ -10,27 +10,40 @@ import CateFood from "../components/CateFood.vue";
 
 export default {
   name: "Home",
+  inject: ["menuUrl"],
   components: {
     MenuList,
     CateFood,
   },
   data() {
     return {
-      CategoryList: [],
+      cateId : null,
+      menuList: [],
     };
   },
   methods: {
-    currentCategory(event) {
-      let category = document.getElementsByClassName("navCate");
-      for (let test = 0; test < category.length; test++) {
-        if (event.target.innerHTML != category[test].innerHTML) {
-          category[test].style.backgroundColor = "white";
-          category[test].style.color = "#22223B";
-        } else {
-          category[test].style.backgroundColor = "#4A4E69";
-          category[test].style.color = "white";
-        }
+    async getMenuList() {
+      try {
+        const res = await fetch(this.menuUrl);
+        const data = res.json();
+        return data;
+      } catch (error) {
+        console.log(`Counld not get! ${error}`);
       }
+    },
+    selectCate(id){
+      this.cateId = id;
+    }
+  },
+  async created() {
+    this.menuList = await this.getMenuList();
+  },
+  computed: {
+    menuFilterList() {
+      if(this.cateId == null) return this.menuList;
+      return this.menuList.filter(list => {
+        return list.category.cateId == this.cateId
+      })
     }
   }
 }

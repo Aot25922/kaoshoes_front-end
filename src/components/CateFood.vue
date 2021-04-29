@@ -1,19 +1,21 @@
 <template>
-    <div id="catefood" class="flex flex-wrap">
-        <div
-        class="navCate"
-        @click="currentCategory"
-        v-for="category in categoryList"
-        :key="category.id"
-      >
-        {{ category.cateName }}
-      </div>
-    </div>
+  <div id="catefood">
+    <button class="navCate ml-auto cursor-pointer hover:bg-cadet focus:bg-cadet" v-on:click="$emit('SelectCate',null)">
+      Main Menu
+    </button>
+    <button class="navCate ml-auto cursor-pointer hover:bg-cadet focus:bg-cadet" 
+    v-for="category in categoryList" 
+    :key="category.cateId"
+    v-on:click="$emit('SelectCate',category.cateId)">
+      {{ category.cateName }}
+    </button>
+  </div>
 </template>
 
 <script>
 export default {
   name: "CateFood",
+  emit: ["SelectCate"],
   inject: ["categoryUrl"],
   data() {
     return {
@@ -21,18 +23,6 @@ export default {
     };
   },
   methods: {
-    currentCategory(event) {
-      let category = document.getElementsByClassName("navCate");
-      for (let test = 0; test < category.length; test++) {
-        if (event.target.innerHTML != category[test].innerHTML) {
-          category[test].style.backgroundColor = "white";
-          category[test].style.color = "#22223B";
-        } else {
-          category[test].style.backgroundColor = "#4A4E69";
-          category[test].style.color = "white";
-        }
-      }
-    },
     async getCategory() {
       try {
         const res = await fetch(this.categoryUrl);
@@ -45,7 +35,6 @@ export default {
   },
   async created() {
     this.categoryList = await this.getCategory();
-    console.log(this.categoryList);
   },
 };
 </script>
