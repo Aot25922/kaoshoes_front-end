@@ -4,5 +4,5 @@ COPY . /mysrc
 RUN npm instal
 RUN npm update
 RUN npm run build
-EXPOSE 80
+EXPOSE 8080
 CMD ["npm","run","serve"]
