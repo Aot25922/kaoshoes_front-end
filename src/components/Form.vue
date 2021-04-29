@@ -1,9 +1,9 @@
 <template>
   <div id="form" class="md:p-5">
     <form
-      action="http://localhost:8080/menu/add"
-      class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2">
-
+      @submit.prevent="submitform"
+      class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2"
+    >
       <div class="md:w-full flex">
         <div class="md:w-1/2 flex flex-col">
           <label for="name">Product Name</label>
@@ -16,7 +16,7 @@
             v-model="Menuname"
           />
         </div>
-        <div class="md:w-1/2 flex flex-col">
+        <!-- <div class="md:w-1/2 flex flex-col">
           <label for="Mdate">Manufacturer Date</label>
           <input
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
@@ -26,7 +26,7 @@
             name="date"
             v-model="date"
           />
-        </div>
+        </div> -->
       </div>
 
       <div class="md:w-full flex flex-col">
@@ -61,12 +61,14 @@
         />
       </div>
       <div class="md:w-1/2">
-        <img alt="Image here" />
-        <input type="file" name="img" />
-        <!-- <div v-for="color in colors" :key="colorId">
-        <input type="checkbox" id="vehicle1" name="color.name + 'color.id'" value="Bike" />
-        <label for="color.name+'color.id'"> {{color.name}}</label><br />
-      </div> -->
+        <img id="output" width="200" />
+        <input
+          type="file"
+          name="img"
+          accept="image/*"
+          id="file"
+          @change="onFileChange($event)"
+        />
       </div>
       <div class="md:w-1/2">
         <div class="md:w-1/2 flex flex-col">
@@ -74,16 +76,29 @@
           <div class="md:p-3 md:text-lg">
             <select id="category" class="" name="category" v-model="category">
               <option disabled value="">Please select one</option>
-              <option :value="category" v-for="category in CategoryList" :key="category.id">{{category.cateName}}</option>
+              <option
+                :value="category"
+                v-for="category in CategoryList"
+                :key="category.id"
+              >
+                {{ category.cateName }}
+              </option>
             </select>
           </div>
         </div>
         <div class="md:w-1/2 flex flex-col">
-        <div v-for="size in SizeList" :key="size.id">
-          <label class="checkbox-inline">
-          <input type="checkbox" :id="size.id" name="size" :value="size" v-model="mysize"> {{size.size}}
-          </label>
-        </div>
+          <div v-for="size in SizeList" :key="size.id">
+            <label class="checkbox-inline">
+              <input
+                type="checkbox"
+                :id="size.id"
+                name="size"
+                :value="size"
+                v-model="choosesize"
+              />
+              {{ size.size }}
+            </label>
+          </div>
         </div>
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
@@ -107,7 +122,7 @@ export default {
   props: {
     colors: null,
   },
-  inject:["categoryurl","sizeurl"],
+  inject: ["categoryurl", "sizeurl"],
   data() {
     return {
       Menuname: "",
@@ -115,13 +130,18 @@ export default {
       Descript: "",
       Costl: 0,
       Image_Path: "",
-      category_cateid: 1,
-      mysize:[],
-      CategoryList:[],
-      SizeList:[]
+      mysize: [],
+      CategoryList: [],
+      SizeList: [],
+      category: null,
+      price: 0,
+      choosesize: [],
     };
   },
-  methods:{
+  methods: {
+    submitform() {
+      this.addNewMenu();
+    },
     async getCategoryResult() {
       try {
         const res = await fetch(this.categoryurl);
@@ -139,13 +159,39 @@ export default {
       } catch (error) {
         console.log(`Counld not get! ${error}`);
       }
-    }
+    },
+    async addNewMenu() {
+      let Menu = JSON.stringify({
+        menuName: this.Menuname,
+        price: this.price,
+        // date : this.date,
+        descript: this.Descript,
+        cost: this.Costl,
+        imagePath: this.Image_Path,
+        category: this.category,
+        mysize: this.choosesize,
+      });
+      let data = new FormData();
+      data.append("menu", Menu);
+      try {
+        await fetch("http://localhost:8080/menu", {
+          method: "POST",
+          body: data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    onFileChange(event) {
+      var image = document.getElementById("output");
+      image.src = URL.createObjectURL(event.target.files[0]);
+    },
   },
 
-  async created(){
-    this.CategoryList= await this.getCategoryResult()
-    this.SizeList = await this.getSizeResult()
-  }
+  async created() {
+    this.CategoryList = await this.getCategoryResult();
+    this.SizeList = await this.getSizeResult();
+  },
 };
 </script>
 

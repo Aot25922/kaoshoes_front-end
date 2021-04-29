@@ -89,7 +89,6 @@ export default {
   },
   async created() {
     this.foodList = await this.getProductResult();
-    console.log(this.foodList);
   },
 };
 </script>
