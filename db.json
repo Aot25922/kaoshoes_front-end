@@ -1,24 +1,70 @@
 {
-    "productList": [
+    "foodList": [
         {
             "id": 1,
-            "name": "Japanese Battleship Yamato",
-            "description": "Length: 375mm. Image shows assembled and painted kit. This is an assembly kit of the Yamato, a Japanese Navy battleship completed in December 1941 with a 64,000 ton displacement, nine 46cm guns which had a 41km firing range, and a host of other revolutionary features. Tamiya has recreated the Yamato in her final form, as she headed towards Okinawa on her final sortie. The flare of the bow and the armor belts along her sides have been accurately reproduced, along with her main turrets, secondary 15.5cm gun turrets, and anti-aircraft armament including 12.7cm gun mounts. Parts are also included to depict rangefinders, radars, and cranes to enable a detailed finish.",
-            "price": 2400,
-            "date": "23-4-1989",
-            "img": "https://www.tamiya.com/english/products/31113/top.jpg",
-            "brand": "JPN",
-            "scale":  "1/700"
+            "name": "ไข่ตุ๋นหมูสับ",
+            "description": "สำหรับเมนูนี้เราสามารถทำได้โดยใช้ไมโครเวฟเท่านั้น เอาใจเด็กหอหรือคนที่ต้องการความรวดเร็ว ไม่ใช่แค่นั้นนะ ไข่ตุ๋นยังเป็นเมนูที่ติดอันดับต้นๆ ของคนรักสุขภาพด้วย",
+            "price": 120,
+            "cost": 100,
+            "date": "28/4/2021",
+            "img": "https://static.wixstatic.com/media/b4c676_ac5bf0938f3048af80f31490ed9b70a1~mv2.jpg/v1/fill/w_740,h_443,al_c,q_90,usm_0.66_1.00_0.01/b4c676_ac5bf0938f3048af80f31490ed9b70a1~mv2.webp",
+            "brand": "Main Course",
+            "size":  "M"
         },
         {
             "id": 2,
-            "name": "British Battleship King George V",
-            "description": "Length: 322mm. Image shows assembled and painted kit. This is an assembly kit of the King George V, a 35,000 ton battleship completed in October 1940. She took part in the sinking of the German battleship Bismarck with the HMS Rodney in May 1941, and was active in the Pacific during the latter half of the war, including bombarding Japan's home islands. The model depicts the ship as she appeared during these operations against Japan, with additional radar and anti-aircraft armament. The funnel, bridge, and deck areas all feature realistic details.",
-            "price": 2200,
-            "date": "23-4-1986",
-            "img": "https://www.tamiya.com/english/products/77525/top.jpg",
-            "brand": "HMS",
-            "scale":  "1/700"
+            "name": "ต้มยำกุ้ง",
+            "description": "เป็นซุปแบบไทยที่เป็นที่รู้จักมากที่สุดและเป็นที่นิยมมากที่สุดไม่เฉพาะแต่ในเมืองไทยเท่านั้น แต่ยังเป็นที่นิยมในร้านอาหาร (และครัวไทย) อื่นๆทั่วโลก ต้มยำเป็นซุปรสเปรี้ยวปรุงด้วยเครื่องเทศของไทยที่เป็นที่นิยมหลากหลายชนิด: ทั้งตะไคร้กลิ่นหอมหวน แง่งข่าสด และใบมะกรูด",
+            "price": 200,
+            "cost": 150,
+            "date": "28/4/2021",
+            "img": "http://3.bp.blogspot.com/-X9dP-MSMlIw/VJBRjKAUk7I/AAAAAAAAAHU/WhedLBbA4_M/s1600/m3_01.jpg",
+            "brand": "Main Course",
+            "size":  "M"
+        },
+        {
+            "id": 3,
+            "name": "ผัดไทย",
+            "description": "เป็นอาหารที่ได้รับความนิยมทั้งในประเทศไทยและต่างประเทศ มีผู้คนมากมายมาประเทศไทยเพื่อลิ้มรสชาติผัดไทยขนาดแท้ ผัดไทยเป็นเส้นหมี่สีขาวผัดให้เข้ากันกับส่วนผสมอื่นๆอีกหลายชนิดได้แก่ไข่ น้ำปลา น้ำมะขามเปียก พริกป่น ถั่วงอก นอกจากนี้ยังสามารถใส่กุ้งหรือเนื้อไก่ลงไปได้ด้วย หลักๆแล้วผัดไทยแบ่งออกเป็น 2 ชนิดคือ แบบแห้งและแบบชุ่มน้ำมันที่มักพบในประเทศอื่นๆที่ไม่ใช่ประเทศไทย ผัดไทยเป็นอาหารที่ดีต่อสุขภาพ ประกอบด้วยส่วนผสมธรรมชาติมากมาย และไม่จำเป็นต้องรับประทานกับข้าวสวยเหมือนอาหารไทยส่วนใหญ่อื่นๆ แท้จริงแล้วผัดไทยถือกำเนิดขึ้นเมื่อครั้งมีอุทกภัยใหญ่ในประเทศไทย ซึ่งเป็นช่วงที่ข้าวขาดแคลน",
+            "price": 80,
+            "cost": 50,
+            "date": "27/4/2021",
+            "img": "http://2.bp.blogspot.com/-0J7GolBDhhY/VJBRjSOFhUI/AAAAAAAAAHc/GRbVm_Qhwbw/s1600/m4_01.jpg",
+            "brand": "Main Course",
+            "size":  "M"
+        },
+        {
+            "id": 4,
+            "name": "ส้มตำ",
+            "description": "มีต้นกำเนิดมาจากทางภาคตะวันออกเฉียงเหนือของประเทศไทย (ภาคอีสาน) อาหารจานนี้เป็นหนึ่งในอาหารที่เป็นมากกว่าอาหารจานอร่อยจากหนึ่ง เพราะส้มตำถือว่าเป็นวิถีชีวิตของผู้คนเลยทีเดียว กระเทียม พริก ถั่วฝักยาว มะเขือเทศราชินี และมะละกอดิบสับเป็นเส้นๆตำ คลุกเคล้าด้วยสากกะเบือและครก จนกลายเป็นอาหารที่มีรสชาติหวาน เปรี้ยว เผ็ดที่เป็นเอกลักษณ์ที่คุณจะต้องชอบ -หรือไม่ชอบ ส้มตำไม่ใช่อาหารที่เหมาะกับคนขี้อายหรือใจแคบ แต่ถ้าได้ลองหลายๆครั้งรับรองว่าคุณจะต้องชอบอาหารจานนี้แน่ ส้มตำมีหลายแบบแตกต่างกันไปตามภูมิภาค มีทั้งแบบใส่ถั่วลิสง กุ้งแห้ง หรือปูเค็มลงไปพร้อมกับส่วนผสมท้องถิ่นอีกมากมายหลายชนิดที่คุณจะต้องตะลึง ถ้าคุณอยากจะรับประทานส้มตำที่มีความเป็น 'ท้องถิ่น' น้อยหน่อย ก็ให้สั่ง 'ส้มตำไทย' แทน",
+            "price": 50,
+            "cost": 30,
+            "date": "27/4/2021",
+            "img": "http://3.bp.blogspot.com/-Y6GErEjWwgU/VJBRoPwnrhI/AAAAAAAAAH4/6xVwEEvhQ20/s1600/m6_01.jpg",
+            "brand": "Main Course",
+            "size":  "M"
+        },
+        {
+            "id": 5,
+            "name": "เมี่ยงปลาเผา",
+            "description": "อีกหนึ่งเมนูยอดนิยมสำหรับคนรักสุขภาพ ปลาเนื้อแน่นห่อเกลือ เผาด้วยเตาถ่านจนได้กลิ่นหอม เสิร์ฟพร้อมน้ำจิ้มสองสไตล์ คือ น้ำจิ้มซีฟู้ดและน้ำจิ้มรสหวาน กินคู่ผักสดหวานกรอบ และเส้นหมี่ขาวลวกจนเหนียวนุ่ม วิธีกินให้อร่อย คือ นำเส้นหมี่วางลงบนผักอย่างผักกาดขาวหรือผักกาดหอม ตามด้วยเนื้อปลา เพิ่มความหอมด้วยผักชีไทย หรือ ผักชีฝรั่งตามชอบ ราดด้วยน้ำจิ้ม ห่อให้พอดีคำ ทำให้ได้รสชาติครบรส ทั้งยังได้คุณค่าและสารอาหารอย่างครบถ้วน",
+            "price": 120,
+            "cost": 220,
+            "date": "27/4/2021",
+            "img": "http://4.bp.blogspot.com/-tV_JNToPeEE/VJBRnuNZNFI/AAAAAAAAAH0/2wKZoOMtte0/s1600/m18_01.jpg",
+            "brand": "Main Course",
+            "size":  "M"
+        },
+        {
+            "id": 6,
+            "name": "ชาเย็น",
+            "description": "ชาไทยกลิ่นหอม ใสนมข้นรสหวานมัน ราดด้วยนมสดตัดกับสีส้มอ่อน ทำให้ได้เครื่องดื่มรสชาตินุ่มละมุน จนติดอันดับ 27 จาก 50อันดับเครื่องดื่มที่อร่อยที่สุดในโลก",
+            "price": 25,
+            "cost": 15,
+            "date": "27/4/2021",
+            "img": "http://2.bp.blogspot.com/-0QIsG5ktq8E/VJGZyc2NR7I/AAAAAAAAAJw/g5Ren_9TPl0/s1600/w1_01.jpg",
+            "brand": "Beverage",
+            "size":  "M"
         }
     ]
 }

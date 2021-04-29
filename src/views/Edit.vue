@@ -1,16 +1,26 @@
 <template>
   <div id="edit" class="">
-    <show-product :isEdit="true"/>
+    <food-list @edit-data='editData' @delete-data='deleteData' :isEdit='true' />
   </div>
 </template>
 
 <script>
-import ShowProduct from "../components/ShowProduct.vue";
+import FoodList from "../components/FoodList.vue";
+
 export default {
 name: "Edit",
+emits: ['edit-mydata'],
   components: {
-    ShowProduct,
+    FoodList,
   },
+methods : {
+  editData(food){
+    this.$emit("edit-mydata",food)
+  },
+  deleteData(food){
+    console.log(food)
+  }
+}
 }
 </script>
 
