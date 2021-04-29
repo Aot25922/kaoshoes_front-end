@@ -43,7 +43,7 @@
           style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
           class="w-11/12"
           type="number"
-          name="Costl"
+          name="cost"
         />
       </div>
       <div class="w-1/2 flex flex-col">
@@ -66,7 +66,7 @@
       <div class="w-1/2">
         <div class="w-1/2 flex flex-col">
           <label for="category">Category</label>
-          <div class="">
+          <div class="p-3 text-lg">
             <select id="category" class="" name="category">
               <option>Main Course</option>
               <option>Beverage</option>
@@ -76,11 +76,15 @@
         </div>
         <div class="w-1/2 flex flex-col">
           <label for="size">Size</label>
-          <div class="">
-            <select id="size" class="" name="size">
-              <option value="M">Medium</option>
-              <option value="L">Large</option>
-            </select>
+          <div class="p-3 text-lg">
+            <div class="flex flex-row">
+              <input type="checkbox" id="size" value="M" name="Medium" />
+              <p for="medium">Medium</p>
+            </div>
+            <div class="flex flex-row">
+              <input type="checkbox" id="size" value="L" name="Large" />
+              <p for="Large">Large</p>
+            </div>
           </div>
         </div>
       </div>

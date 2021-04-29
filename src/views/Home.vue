@@ -1,9 +1,9 @@
 <template>
   <div id="home" class="p-5">
     <div class="flex flex-wrap mb-10">
-      <div class="navCate ml-auto ">Main Menu</div>
-      <div class="navCate mx-auto">Beverage</div>
-      <div class="navCate mr-auto">Dessert</div>
+      <router-link id="catefood" to="/CateFood" class="navCate ml-auto ">Main Menu</router-link>
+      <router-link id="catefood" to="/CateFood" class="navCate mx-auto">Beverage</router-link>
+      <router-link id="catefood" to="/CateFood"  class="navCate mr-auto">Dessert</router-link>
     </div>
       <food-list :isEdit='false' />
     <!-- <show-product> </show-product> -->
@@ -18,9 +18,11 @@ export default {
   components: {
     FoodList
   },
-  methods: {
-    currentCategory() {},
-  },
+  data(){
+    return{
+      select: null
+    }
+  }
 };
 </script>
 
