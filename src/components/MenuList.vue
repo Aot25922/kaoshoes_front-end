@@ -1,18 +1,16 @@
 <template>
   <div class="grid grid-cols-4 filter drop-shadow-lg">
-    <div class="md:px-2 md:pb-4" v-for="food in foodList" :key="food.id">
-      <div
-        class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative"
-      >
+    <div class="md:px-2 md:pb-4" v-for="menu in menuList" :key="menu.id">
+      <div class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative">
         <div class="relative">
-          <img :src="food.img" class="md:rounded" />
-          <span
-            class="md:absolute md:bottom-0 md:right-0 bg-cadet-dark text-white md:p-2 md:rounded"
-            >{{ food.size }}</span
-          >
+          <img :src="menu.imagePath" class="md:rounded" />
+          <span v-for="size in menu.sizeList" :key="size.id" class="md:absolute md:bottom-0 md:right-0 bg-cadet-dark text-white md:p-2 md:rounded">
+            {{ size.size }}
+          </span>
+            <!-- 
           <button
             class="md:absolute md:-top-2 md:-right-2 hover:opacity-50"
-            @click="$emit('edit-data', food)"
+            @click="$emit('edit-data', menu)"
             v-if="isEdit"
           >
             <svg
@@ -30,16 +28,16 @@
           </button>
         </div>
         <div class="flex flex-wrap md:pt-1">
-          <p class="sm:text-left sm:w-2/3">{{ food.name }}</p>
-          <p class="sm:text-right sm:w-1/3">{{ food.price }}฿</p>
+          <p class="sm:text-left sm:w-2/3">{{ menu.name }}</p>
+          <p class="sm:text-right sm:w-1/3">{{ menu.price }}฿</p>
         </div>
         <p class="text-gray-500 sm:text-sm sm:break-all des-text">
-          {{ food.description }}
+          {{ menu.description }}
         </p>
         <div class='flex justify-end mt-2 hover:opacity-50'>
         <button
           class=""
-          @click="$emit('delete-data', food)"
+          @click="$emit('delete-data', menu)"
           v-if="isEdit"
         >
           <svg
@@ -54,29 +52,29 @@
               fill="#FB3640"
             />
           </svg>
-        </button>
+        </button>-->
         </div>
-      </div>
+      </div> 
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "FoodList",
+  name: "MenuList",
   emits: ["edit-data", "delete-data"],
+  inject: ["menuUrl"],
   props: {
     isEdit: Boolean,
   },
   data() {
     return {
-      foodList: [],
-      url: "http://localhost:5000/foodList",
+      menuList: [],
     };
   },
   methods: {
     async getProductResult() {
       try {
-        const res = await fetch(this.url);
+        const res = await fetch(this.menuUrl);
         const data = res.json();
         return data;
       } catch (error) {
@@ -88,8 +86,8 @@ export default {
     }
   },
   async created() {
-    this.foodList = await this.getProductResult();
-    console.log(this.foodList);
+    this.menuList = await this.getProductResult();
+    console.log(this.menuList);
   },
 };
 </script>

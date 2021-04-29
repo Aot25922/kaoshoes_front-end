@@ -1,35 +1,19 @@
 <template>
   <div id="home" class="p-5">
-    <div class="flex flex-wrap mb-10">
-      <div
-        class="navCate ml-auto cursor-pointer"
-        @click="currentCategory"
-        v-for="category in CategoryList"
-        :key="category.id"
-      >
-        {{ category.cateName }}
-      </div>
-
-    </div>
-    <food-list :isEdit="false" />
-    <!-- <show-product> </show-product> -->
+    <cate-food/>
+    <menu-list/>
   </div>
 </template>
-
 <script>
-import FoodList from "../components/FoodList.vue";
+import MenuList from "../components/MenuList.vue";
+import CateFood from "../components/CateFood.vue";
 
 export default {
   name: "Home",
   components: {
-    FoodList,
+    MenuList,
+    CateFood,
   },
-  provide() {
-    return {
-      categoryurl: this.categoryurl,
-    };
-  },
-  inject: ["categoryurl"],
   data() {
     return {
       CategoryList: [],
@@ -47,21 +31,9 @@ export default {
           category[test].style.color = "white";
         }
       }
-    },
-    async getProductResult() {
-      try {
-        const res = await fetch(this.categoryurl);
-        const data = res.json();
-        return data;
-      } catch (error) {
-        console.log(`Counld not get! ${error}`);
-      }
-    },
-  },
-  async created() {
-    this.CategoryList = await this.getProductResult();
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>

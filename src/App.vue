@@ -13,8 +13,9 @@ export default {
   name: "App",
   provide(){
     return{
-      categoryurl : `${this.categoryurl}/category`,
-      sizeurl : `${this.categoryurl}/size`
+      menuUrl : `${this.dbUrl}/menu`,
+      categoryUrl : `${this.dbUrl}/category`,
+      sizeUrl : `${this.dbUrl}/size`
     }
   },
   data(){

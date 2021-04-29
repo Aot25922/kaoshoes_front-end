@@ -4,19 +4,12 @@ import Property from '../views/Property.vue'
 import Team from '../views/Team.vue'
 import Add from '../views/Add.vue'
 import Edit from '../views/Edit.vue'
-import CateFood from '../views/CateFood.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
-    children: [
-      {
-        path: 'CateFood',
-        component: CateFood
-      }
-    ]
   },
   {
     path: '/Property',
