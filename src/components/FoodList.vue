@@ -1,17 +1,17 @@
 <template>
   <div class="grid grid-cols-4 filter drop-shadow-lg">
-    <div class="px-2 pb-4" v-for="food in foodList" :key="food.id">
+    <div class="md:px-2 md:pb-4" v-for="food in foodList" :key="food.id">
       <div
-        class="bg-white col-span-1 p-5 text-lg font-medium h-full rounded-md drop-shadow-xl relative"
+        class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative"
       >
         <div class="relative">
-          <img :src="food.img" class="rounded" />
+          <img :src="food.img" class="md:rounded" />
           <span
-            class="absolute bottom-0 right-0 bg-cadet-dark text-white p-2 rounded"
+            class="md:absolute md:bottom-0 md:right-0 bg-cadet-dark text-white md:p-2 md:rounded"
             >{{ food.size }}</span
           >
           <button
-            class="absolute -top-2 -right-2 hover:opacity-50"
+            class="md:absolute md:-top-2 md:-right-2 hover:opacity-50"
             @click="$emit('edit-data', food)"
             v-if="isEdit"
           >
@@ -29,11 +29,11 @@
             </svg>
           </button>
         </div>
-        <div class="flex flex-wrap pt-1">
-          <p class="text-left w-2/3">{{ food.name }}</p>
-          <p class="text-right w-1/3">{{ food.price }}฿</p>
+        <div class="flex flex-wrap md:pt-1">
+          <p class="sm:text-left sm:w-2/3">{{ food.name }}</p>
+          <p class="sm:text-right sm:w-1/3">{{ food.price }}฿</p>
         </div>
-        <p class="text-gray-500 text-sm break-all  des-text">
+        <p class="text-gray-500 sm:text-sm sm:break-all des-text">
           {{ food.description }}
         </p>
         <div class='flex justify-end mt-2 hover:opacity-50'>

@@ -54,6 +54,17 @@
             "img": "http://4.bp.blogspot.com/-tV_JNToPeEE/VJBRnuNZNFI/AAAAAAAAAH0/2wKZoOMtte0/s1600/m18_01.jpg",
             "brand": "Main Course",
             "size":  "M"
+        },
+        {
+            "id": 6,
+            "name": "ชาเย็น",
+            "description": "ชาไทยกลิ่นหอม ใสนมข้นรสหวานมัน ราดด้วยนมสดตัดกับสีส้มอ่อน ทำให้ได้เครื่องดื่มรสชาตินุ่มละมุน จนติดอันดับ 27 จาก 50อันดับเครื่องดื่มที่อร่อยที่สุดในโลก",
+            "price": 25,
+            "cost": 15,
+            "date": "27/4/2021",
+            "img": "http://2.bp.blogspot.com/-0QIsG5ktq8E/VJGZyc2NR7I/AAAAAAAAAJw/g5Ren_9TPl0/s1600/w1_01.jpg",
+            "brand": "Beverage",
+            "size":  "M"
         }
     ]
 }

@@ -9,6 +9,7 @@
       >
         {{ category.cateName }}
       </div>
+
     </div>
     <food-list :isEdit="false" />
     <!-- <show-product> </show-product> -->

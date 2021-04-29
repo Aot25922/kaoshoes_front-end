@@ -1,26 +1,26 @@
 <template>
-  <div id="form" class="p-5">
+  <div id="form" class="md:p-5">
     <form
       action="http://localhost:8080/menu/add"
-      class="bg-helio-light p-7 flex flex-wrap rounded-md space-y-2"
-    >
-      <div class="w-full flex">
-        <div class="w-1/2 flex flex-col">
+      class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2">
+
+      <div class="md:w-full flex">
+        <div class="md:w-1/2 flex flex-col">
           <label for="name">Product Name</label>
           <input
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-            class="w-11/12"
+            class="md:w-11/12"
             type="text"
             id="Menuname"
             name="Menuname"
             v-model="Menuname"
           />
         </div>
-        <div class="w-1/2 flex flex-col">
+        <div class="md:w-1/2 flex flex-col">
           <label for="Mdate">Manufacturer Date</label>
           <input
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-            class="w-1/3"
+            class="lg:w-1/3"
             type="Date"
             id="MDate"
             name="date"
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div class="w-full flex flex-col">
+      <div class="md:w-full flex flex-col">
         <label for="Des">Product Description</label>
         <textarea
           type="text"
@@ -40,7 +40,7 @@
         >
         </textarea>
       </div>
-      <div class="w-1/2 flex flex-col">
+      <div class="md:w-1/2 flex flex-col">
         <label for="cost">Cost</label>
         <input
           style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
@@ -50,17 +50,17 @@
           v-model="Costl"
         />
       </div>
-      <div class="w-1/2 flex flex-col">
+      <div class="md:w-1/2 flex flex-col">
         <label for="price">Price</label>
         <input
           style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-          class="w-11/12"
+          class="md:w-11/12"
           type="number"
           name="price"
           v-model="price"
         />
       </div>
-      <div class="w-1/2">
+      <div class="md:w-1/2">
         <img alt="Image here" />
         <input type="file" name="img" />
         <!-- <div v-for="color in colors" :key="colorId">
@@ -68,9 +68,10 @@
         <label for="color.name+'color.id'"> {{color.name}}</label><br />
       </div> -->
       </div>
-      <div class="w-1/2">
-        <div class="w-1/2 flex flex-col">
+      <div class="md:w-1/2">
+        <div class="md:w-1/2 flex flex-col">
           <label for="category">Category</label>
+<<<<<<< HEAD
           <div class="">
             <select id="category" class="" name="category" v-model="category">
               <option disabled value="">Please select one</option>
@@ -83,16 +84,39 @@
           <input type="checkbox" :id="size.id" name="size" :value="size" v-model="mysize">
           <label :for="size.id">{{size.size}}</label>
         </div>
+=======
+          <div class="md:p-3 md:text-lg">
+            <select id="category" class="" name="category">
+              <option value="1">Main Course</option>
+              <option value="2">Beverage</option>
+              <option value="3">Dessert</option>
+            </select>
+          </div>
+        </div>
+        <div class="md:w-1/2 flex flex-col">
+          <h3 class="checkbox-inline">
+            <input class="md:mr-1" type="checkbox" id="size1" name="size" value="{1,'xl'}"/>Extra Large (XL)
+          </h3>
+          <h3 class="checkbox-inline">
+            <input class="mr-1" type="checkbox" id="size1" name="size" value="{2,'l'}"/>Large (L)
+          </h3>
+          <h3 class="checkbox-inline">
+            <input class="md:mr-1" type="checkbox" id="size1" name="size" value="{3,'m'}"/>Medium (M)
+          </h3>
+          <h3 class="checkbox-inline">
+            <input class="md:mr-1" type="checkbox" id="size1" name="size" value="{4,'s'}"/>Small (S)
+          </h3>
+>>>>>>> 9683a2416af723dc0aeb7e1dba584d5d8a535f5c
         </div>
       </div>
-      <div class="flex justify-end w-full space-x-5">
+      <div class="flex justify-end md:w-full md:space-x-5">
         <button
-          class="bg-green-500 text-3xl font-bold py-5 px-8 hover:bg-green-light rounded-lg"
+          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
         >
           Add
         </button>
         <button
-          class="bg-red text-3xl font-bold py-5 px-8 hover:bg-red-salsa rounded-lg"
+          class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg"
         >
           Cancel
         </button>
@@ -109,15 +133,19 @@ export default {
   inject:["categoryurl","sizeurl"],
   data() {
     return {
-      Menuname:'',
-      date:'',
-      Descript:'',
-      Costl:0,
-      Image_Path:'',
+      Menuname: "",
+      date: "",
+      Descript: "",
+      Costl: 0,
+      Image_Path: "",
       category_cateid: 1,
+<<<<<<< HEAD
       mysize:[],
       CategoryList:[],
       SizeList:[]
+=======
+      mysize: {},
+>>>>>>> 9683a2416af723dc0aeb7e1dba584d5d8a535f5c
     };
   },
   methods:{
@@ -167,5 +195,9 @@ button {
 option {
   padding: 1%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+h3 {
+  font-size: large;
+  font-weight: 600;
 }
 </style>
