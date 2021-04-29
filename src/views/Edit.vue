@@ -9,12 +9,13 @@ import FoodList from "../components/FoodList.vue";
 
 export default {
 name: "Edit",
+emits: ['edit-mydata'],
   components: {
     FoodList,
   },
 methods : {
   editData(food){
-    console.log(food);
+    this.$emit("edit-mydata",food)
   },
   deleteData(food){
     console.log(food)

@@ -14,12 +14,18 @@ module.exports = {
           light: "#F2E9E4"
         },
         red: {
-          salsa : "#F87060",
+          salsa: "#F87060",
           DEFAULT: "#FF4040"
         },
-        green:{
+        green: {
           light: "#56E39F"
         }
+      },
+      screen: {
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px'
       }
     },
   },
