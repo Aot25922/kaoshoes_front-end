@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-4 filter drop-shadow-lg">
+  <div class="grid grid-cols-4 filter drop-shadow-lg md:pt-5">
     <div class="md:px-2 md:pb-4" v-for="menu in menuList" :key="menu.id">
       <div class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative">
         <div class="relative">

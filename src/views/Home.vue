@@ -35,13 +35,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-p {
-  font-weight: bold;
-  padding: 0.5rem;
-}
-span {
-  font-weight: normal;
-}
-</style>

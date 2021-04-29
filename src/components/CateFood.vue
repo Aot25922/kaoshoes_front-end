@@ -1,7 +1,7 @@
 <template>
-    <div id="catefood">
+    <div id="catefood" class="flex flex-wrap">
         <div
-        class="navCate ml-auto cursor-pointer"
+        class="navCate"
         @click="currentCategory"
         v-for="category in categoryList"
         :key="category.id"
