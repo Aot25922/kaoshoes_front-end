@@ -1,7 +1,7 @@
 <template>
   <div id="form" class="p-5">
     <form
-      @submit.prevent="submitForm"
+      action="http://localhost:8080/menu/add"
       class="bg-helio-light p-7 flex flex-wrap rounded-md space-y-2"
     >
       <div class="w-full flex">
@@ -13,6 +13,7 @@
             type="text"
             id="Menuname"
             name="Menuname"
+            v-model="Menuname"
           />
         </div>
         <div class="w-1/2 flex flex-col">
@@ -23,6 +24,7 @@
             type="Date"
             id="MDate"
             name="date"
+            v-model="date"
           />
         </div>
       </div>
@@ -34,6 +36,7 @@
           id="Descript"
           name="Descript"
           placeholder="Please insert description..."
+          v-model="Descript"
         >
         </textarea>
       </div>
@@ -44,6 +47,7 @@
           class="w-11/12"
           type="number"
           name="Costl"
+          v-model="Costl"
         />
       </div>
       <div class="w-1/2 flex flex-col">
@@ -53,6 +57,7 @@
           class="w-11/12"
           type="number"
           name="price"
+          v-model="price"
         />
       </div>
       <div class="w-1/2">
@@ -67,20 +72,17 @@
         <div class="w-1/2 flex flex-col">
           <label for="category">Category</label>
           <div class="">
-            <select id="category" class="" name="category">
-              <option value="1">Main Course</option>
-              <option value="2">Beverage</option>
-              <option value="3">Dessert</option>
+            <select id="category" class="" name="category" v-model="category">
+              <option disabled value="">Please select one</option>
+              <option :value="category" v-for="category in CategoryList" :key="category.id">{{category.cateName}}</option>
             </select>
           </div>
         </div>
         <div class="w-1/2 flex flex-col">
-          <input type="checkbox" id="size1" name="size" value="{1,'xl'}">
-          <label for="size1">xl</label>
-          <input type="checkbox" id="size1" name="size" value="{2,'l'}">
-          <label for="size1">l</label>
-          <input type="checkbox" id="size1" name="size" value="{3,'s'}">
-          <label for="size1">s</label>
+        <div v-for="size in SizeList" :key="size.id">
+          <input type="checkbox" :id="size.id" name="size" :value="size" v-model="mysize">
+          <label :for="size.id">{{size.size}}</label>
+        </div>
         </div>
       </div>
       <div class="flex justify-end w-full space-x-5">
@@ -104,6 +106,7 @@ export default {
   props: {
     colors: null,
   },
+  inject:["categoryurl","sizeurl"],
   data() {
     return {
       Menuname:'',
@@ -112,9 +115,36 @@ export default {
       Costl:0,
       Image_Path:'',
       category_cateid: 1,
-      mysize:{}
+      mysize:[],
+      CategoryList:[],
+      SizeList:[]
     };
   },
+  methods:{
+    async getCategoryResult() {
+      try {
+        const res = await fetch(this.categoryurl);
+        const data = res.json();
+        return data;
+      } catch (error) {
+        console.log(`Counld not get! ${error}`);
+      }
+    },
+    async getSizeResult() {
+      try {
+        const res = await fetch(this.sizeurl);
+        const data = res.json();
+        return data;
+      } catch (error) {
+        console.log(`Counld not get! ${error}`);
+      }
+    }
+  },
+
+  async created(){
+    this.CategoryList= await this.getCategoryResult()
+    this.SizeList = await this.getSizeResult()
+  }
 };
 </script>
 
