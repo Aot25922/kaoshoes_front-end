@@ -1,7 +1,7 @@
 FROM node:alpine 
 WORKDIR /mysrc
 COPY . /mysrc
-RUN npm instal
+RUN npm install
 RUN npm update
 RUN npm run build
 EXPOSE 8080
