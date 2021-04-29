@@ -71,42 +71,19 @@
       <div class="md:w-1/2">
         <div class="md:w-1/2 flex flex-col">
           <label for="category">Category</label>
-<<<<<<< HEAD
-          <div class="">
+          <div class="md:p-3 md:text-lg">
             <select id="category" class="" name="category" v-model="category">
               <option disabled value="">Please select one</option>
               <option :value="category" v-for="category in CategoryList" :key="category.id">{{category.cateName}}</option>
             </select>
           </div>
         </div>
-        <div class="w-1/2 flex flex-col">
-        <div v-for="size in SizeList" :key="size.id">
-          <input type="checkbox" :id="size.id" name="size" :value="size" v-model="mysize">
-          <label :for="size.id">{{size.size}}</label>
-        </div>
-=======
-          <div class="md:p-3 md:text-lg">
-            <select id="category" class="" name="category">
-              <option value="1">Main Course</option>
-              <option value="2">Beverage</option>
-              <option value="3">Dessert</option>
-            </select>
-          </div>
-        </div>
         <div class="md:w-1/2 flex flex-col">
-          <h3 class="checkbox-inline">
-            <input class="md:mr-1" type="checkbox" id="size1" name="size" value="{1,'xl'}"/>Extra Large (XL)
-          </h3>
-          <h3 class="checkbox-inline">
-            <input class="mr-1" type="checkbox" id="size1" name="size" value="{2,'l'}"/>Large (L)
-          </h3>
-          <h3 class="checkbox-inline">
-            <input class="md:mr-1" type="checkbox" id="size1" name="size" value="{3,'m'}"/>Medium (M)
-          </h3>
-          <h3 class="checkbox-inline">
-            <input class="md:mr-1" type="checkbox" id="size1" name="size" value="{4,'s'}"/>Small (S)
-          </h3>
->>>>>>> 9683a2416af723dc0aeb7e1dba584d5d8a535f5c
+        <div v-for="size in SizeList" :key="size.id">
+          <label class="checkbox-inline">
+          <input type="checkbox" :id="size.id" name="size" :value="size" v-model="mysize"> {{size.size}}
+          </label>
+        </div>
         </div>
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
@@ -139,13 +116,9 @@ export default {
       Costl: 0,
       Image_Path: "",
       category_cateid: 1,
-<<<<<<< HEAD
       mysize:[],
       CategoryList:[],
       SizeList:[]
-=======
-      mysize: {},
->>>>>>> 9683a2416af723dc0aeb7e1dba584d5d8a535f5c
     };
   },
   methods:{
