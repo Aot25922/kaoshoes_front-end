@@ -20,7 +20,7 @@
           <p class="sm:text-left sm:w-2/3">{{ menu.menuName }}</p>
           <p class="sm:text-right sm:w-1/3">{{ menu.price }}฿</p>
         </div>
-        <p class="text-gray-500 sm:text-sm sm:break-all des-text">
+        <p class="text-gray-500 sm:text-sm sm:break-all des-text shortDes">
           {{ menu.descript }}
         </p>
         <div class='flex justify-end mt-2 hover:opacity-50'>
@@ -48,3 +48,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.shortDes {
+  display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+</style>

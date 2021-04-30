@@ -21,5 +21,5 @@
 }
 
 .navCate{
-    @apply bg-white md:text-2xl font-bold text-black sm:w-1/4 md:text-center md:p-2 md:rounded-md md:mx-auto cursor-pointer
+    @apply bg-white md:text-2xl font-bold text-black w-full md:text-center md:p-2 md:rounded-md md:mx-auto cursor-pointer
 }

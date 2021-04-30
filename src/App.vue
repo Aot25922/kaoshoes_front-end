@@ -1,9 +1,9 @@
 <template>
-  <div id="app" class="h-screen w-screen md:p-5 bg-helio-dark">
+  <div id="app" class="md:p-5">
     <div class="navBar">
-        <router-link to="/" class="navButton md:flex-shrink-0">Home</router-link>
-        <router-link to="/Property" class="navButton md:flex-shrink-0 ">Edit</router-link>
-        <router-link to="/Team" class="navButton md:flex-shrink-0">About Us</router-link>
+      <router-link to="/" class="navButton md:flex-shrink-0">Home</router-link>
+      <router-link to="/Property" class="navButton md:flex-shrink-0 ">Edit</router-link>
+      <router-link to="/Team" class="navButton md:flex-shrink-0">About Us</router-link>
     </div>
     <router-view />
   </div>
@@ -25,3 +25,9 @@ export default {
   }
 };
 </script>
+
+<style>
+body {
+  background-color: #9A8C98;
+}
+</style>

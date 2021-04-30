@@ -1,9 +1,9 @@
 <template>
-  <div id="catefood">
-    <button class="navCate ml-auto cursor-pointer hover:bg-cadet focus:bg-cadet" v-on:click="$emit('SelectCate',null)">
+  <div id="catefood" class="grid grid-cols-4 gap-4">
+    <button class="navCate cursor-pointer hover:bg-cadet focus:bg-cadet" v-on:click="$emit('SelectCate',null)">
       Main Menu
     </button>
-    <button class="navCate ml-auto cursor-pointer hover:bg-cadet focus:bg-cadet" 
+    <button class="navCate cursor-pointer hover:bg-cadet focus:bg-cadet " 
     v-for="category in categoryList" 
     :key="category.cateId"
     v-on:click="$emit('SelectCate',category.cateId)">
