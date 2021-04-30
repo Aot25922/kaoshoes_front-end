@@ -1,17 +1,17 @@
 <template>
   <div id="edit" class="">
-    <food-list @edit-data='editData' @delete-data='deleteData' :isEdit='true' />
+    <menu-list @edit-data='editData' @delete-data='deleteData' :isEdit='true' />
   </div>
 </template>
 
 <script>
-import FoodList from "../components/FoodList.vue";
+import MenuList from "../components/MenuList.vue";
 
 export default {
 name: "Edit",
 emits: ['edit-mydata'],
   components: {
-    FoodList,
+    MenuList,
   },
 methods : {
   editData(food){
