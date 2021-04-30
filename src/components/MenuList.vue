@@ -4,8 +4,10 @@
       <div class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative">
         <div class="relative">
           <img :src="menu.imagePath=null ? menu.imagePath : 'https://sc04.alicdn.com/kf/HTB1F8QaMXXXXXc_XFXXq6xXFXXXv.jpg'" :key="menu.imagePath" class="md:rounded" />
-          <span v-for="size in menu.sizeList" :key="size.id" class="md:absolute md:bottom-0 md:right-0 bg-cadet-dark text-white md:p-2 md:rounded">
-            {{ size.size }}
+          <span class="md:absolute md:bottom-0 md:right-0 bg-cadet-dark text-white md:p-2 md:rounded">
+            <div class="inline-flex px-1" v-for="size in menu.sizeList" :key="size.id">
+              {{ size.size }}
+            </div>
           </span>
           <button class="md:absolute md:-top-2 md:-right-2 hover:opacity-50" @click="$emit('edit-data', menu)" v-if="isEdit">
             <svg width="50" height="49" viewBox="0 0 50 49" fill="none" xmlns="http://www.w3.org/2000/svg">
