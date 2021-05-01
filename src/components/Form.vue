@@ -1,7 +1,7 @@
 <template>
   <div id="form" class="md:p-5">
     <form
-      @submit.prevent="submitform"
+      @submit.prevent="submitform()"
       class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2"
     >
       <div class="md:w-full flex">
@@ -102,13 +102,20 @@
         </div>
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
-        <button
-          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+        <button v-if="!Edit"
+          type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
         >
           Add
         </button>
+        <button v-if="Edit"
+          type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+        >
+          Save Edit
+        </button>
         <button
+         v-if="Edit"
           class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg"
+          @click="cancel" 
         >
           Cancel
         </button>
@@ -121,12 +128,14 @@ export default {
   name: "Form",
   props: {
     colors: null,
+    isEdit: Boolean,
+    foodToEdit: null,
   },
-  inject: ["categoryurl", "sizeurl"],
+  emits:['cancel-edit'],
+  inject: ["categoryUrl", "sizeUrl"],
   data() {
     return {
       Menuname: "",
-      date: "",
       Descript: "",
       Costl: 0,
       Image_Path: "",
@@ -136,15 +145,21 @@ export default {
       category: null,
       price: 0,
       choosesize: [],
+      file: null,
+      Edit:this.isEdit,
     };
   },
   methods: {
     submitform() {
+      if(this.Edit){
+         this.editMenu()
+      }else{
       this.addNewMenu();
+      }
     },
     async getCategoryResult() {
       try {
-        const res = await fetch(this.categoryurl);
+        const res = await fetch(this.categoryUrl);
         const data = res.json();
         return data;
       } catch (error) {
@@ -153,7 +168,7 @@ export default {
     },
     async getSizeResult() {
       try {
-        const res = await fetch(this.sizeurl);
+        const res = await fetch(this.sizeUrl);
         const data = res.json();
         return data;
       } catch (error) {
@@ -164,15 +179,15 @@ export default {
       let Menu = JSON.stringify({
         menuName: this.Menuname,
         price: this.price,
-        // date : this.date,
         descript: this.Descript,
         cost: this.Costl,
         imagePath: this.Image_Path,
         category: this.category,
-        mysize: this.choosesize,
+        sizeList: this.choosesize,
       });
       let data = new FormData();
       data.append("menu", Menu);
+      data.append("multipartFile", this.file);
       try {
         await fetch("http://localhost:8080/menu", {
           method: "POST",
@@ -182,15 +197,60 @@ export default {
         console.log(error);
       }
     },
+    async editMenu() {
+      let Menu = JSON.stringify({
+        menuName: this.Menuname,
+        price: this.price,
+        descript: this.Descript,
+        cost: this.Costl,
+        imagePath: this.Image_Path,
+        category: this.category,
+        sizeList: this.choosesize,
+      });
+      let data = new FormData();
+      data.append("menu", Menu);
+      data.append("multipartFile", this.file);
+      try {
+        await fetch("http://localhost:8080/menu", {
+          method: "PUT",
+          body: data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     onFileChange(event) {
       var image = document.getElementById("output");
       image.src = URL.createObjectURL(event.target.files[0]);
+      this.file = event.target.files[0];
+      console.log(this.file);
     },
+    cancel(){
+      this.Menuname=''
+      this.Descript=''
+      this.Costl=0
+      this.price=0
+      var image = document.getElementById("output");
+      image.src = "";
+      this.category=null
+      this.choosesize=[]
+      this.$emit('cancel-edit')
+      this.$router.push('/Property/Edit')
+    }
   },
-
   async created() {
     this.CategoryList = await this.getCategoryResult();
     this.SizeList = await this.getSizeResult();
+    if(this.Edit){
+      this.Menuname=this.foodToEdit.menuName
+      this.Descript=this.foodToEdit.descript
+      this.Costl=this.foodToEdit.cost
+      this.price=this.foodToEdit.price
+      var image = document.getElementById("output");
+      image.src = `http://localhost:8080/menu/get/${this.foodToEdit.menuName}`;
+      this.category=this.foodToEdit.category
+      this.choosesize=this.foodToEdit.sizeList
+    }
   },
 };
 </script>

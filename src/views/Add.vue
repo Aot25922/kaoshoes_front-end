@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <product-form/>
+    <product-form :isEdit="isEdit" :foodToEdit="foodToEdit" @cancel-edit="$emit('cancel-edit')"/>
   </div>
 </template>
 
@@ -11,6 +11,11 @@ name: "Add",
   components: {
     productForm,
   },
+  emits:['cancel-edit'],
+props : {
+  isEdit:Boolean,
+  foodToEdit : null
+},
 }
 </script>
 
