@@ -131,7 +131,7 @@ export default {
     isEdit: Boolean,
     foodToEdit: null,
   },
-  emits:['cancel-edit'],
+  emits:['cancel-edit','reload-data'],
   inject: ["categoryUrl", "sizeUrl"],
   data() {
     return {
@@ -196,6 +196,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
+      this.
+      this.cancel()
     },
     async editMenu() {
       let Menu = JSON.stringify({
@@ -211,19 +213,22 @@ export default {
       data.append("menu", Menu);
       data.append("multipartFile", this.file);
       try {
-        await fetch("http://localhost:8080/menu", {
+        await fetch(`http://localhost:8080/menu/${this.foodToEdit.menuId}`, {
           method: "PUT",
           body: data,
         });
       } catch (error) {
         console.log(error);
       }
+      this.cancel()
+      this.$emit('reload-data')
     },
     onFileChange(event) {
       var image = document.getElementById("output");
       image.src = URL.createObjectURL(event.target.files[0]);
       this.file = event.target.files[0];
-      console.log(this.file);
+      this.imagePath=this.file.name;
+      // console.log(this.file);
     },
     cancel(){
       this.Menuname=''
@@ -248,6 +253,7 @@ export default {
       this.price=this.foodToEdit.price
       var image = document.getElementById("output");
       image.src = `http://localhost:8080/menu/get/${this.foodToEdit.menuName}`;
+      this.image_Path=this.foodToEdit.imagePath
       this.category=this.foodToEdit.category
       this.choosesize=this.foodToEdit.sizeList
     }

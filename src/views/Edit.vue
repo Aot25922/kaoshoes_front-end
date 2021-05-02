@@ -18,13 +18,24 @@ data(){
     menuList: []
   }
 },
-inject :  ["menuUrl"],
+inject :  ["menuUrl"]
+,
 methods : {
-  editData(food){
-    this.$emit("edit-mydata",food)
+  editData(menu){
+    this.$emit("edit-mydata",menu)
   },
-  deleteData(food){
-    console.log(food)
+  async deleteData(menu){
+     try {
+        await fetch(`${this.menuUrl}/${menu.menuId}`, {
+          method: "DELETE",
+        });
+      } catch (error) {
+        console.log(error);
+      }
+  },
+  async reload(){
+    console.log("reload")
+    this.menuList = await this.getMenuList();
   },
   async getMenuList() {
       try {
