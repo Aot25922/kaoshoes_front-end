@@ -16,19 +16,7 @@
             v-model="Menuname"
           />
         </div>
-        <!-- <div class="md:w-1/2 flex flex-col">
-          <label for="Mdate">Manufacturer Date</label>
-          <input
-            style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-            class="lg:w-1/3"
-            type="Date"
-            id="MDate"
-            name="date"
-            v-model="date"
-          />
-        </div> -->
       </div>
-
       <div class="md:w-full flex flex-col">
         <label for="Des">Product Description</label>
         <textarea
@@ -102,20 +90,24 @@
         </div>
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
-        <button v-if="!Edit"
-          type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+        <button
+          v-if="!Edit"
+          type="submit"
+          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
         >
           Add
         </button>
-        <button v-if="Edit"
-          type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+        <button
+          v-if="Edit"
+          type="submit"
+          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
         >
           Save Edit
         </button>
         <button
-         v-if="Edit"
+          v-if="Edit"
           class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg"
-          @click="cancel" 
+          @click="cancel;$emit('cancel-form')"
         >
           Cancel
         </button>
@@ -131,7 +123,7 @@ export default {
     isEdit: Boolean,
     foodToEdit: null,
   },
-  emits:['cancel-edit','reload-data'],
+  emits: ['cancel-form','reload-data'],
   inject: ["categoryUrl", "sizeUrl"],
   data() {
     return {
@@ -146,15 +138,15 @@ export default {
       price: 0,
       choosesize: [],
       file: null,
-      Edit:this.isEdit,
+      Edit: this.isEdit,
     };
   },
   methods: {
     submitform() {
-      if(this.Edit){
-         this.editMenu()
-      }else{
-      this.addNewMenu();
+      if (this.Edit) {
+        this.editMenu();
+      } else {
+        this.addNewMenu();
       }
     },
     async getCategoryResult() {
@@ -196,8 +188,7 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      this.
-      this.cancel()
+      this.cancel();
     },
     async editMenu() {
       let Menu = JSON.stringify({
@@ -210,8 +201,19 @@ export default {
         sizeList: this.choosesize,
       });
       let data = new FormData();
+      let editImg = new FormData();
       data.append("menu", Menu);
-      data.append("multipartFile", this.file);
+      if(this.file!==null){
+      editImg.append("multipartFile", this.file);
+       try {
+        await fetch(`http://localhost:8080/menu/image/${this.foodToEdit.menuId}`, {
+          method: "PUT",
+          body: editImg,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      }
       try {
         await fetch(`http://localhost:8080/menu/${this.foodToEdit.menuId}`, {
           method: "PUT",
@@ -220,42 +222,40 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      this.cancel()
-      this.$emit('reload-data')
+      this.$emit("reload-data")
+      this.cancel();
     },
     onFileChange(event) {
       var image = document.getElementById("output");
       image.src = URL.createObjectURL(event.target.files[0]);
       this.file = event.target.files[0];
-      this.imagePath=this.file.name;
-      // console.log(this.file);
+      this.imagePath = this.file.name;
     },
-    cancel(){
-      this.Menuname=''
-      this.Descript=''
-      this.Costl=0
-      this.price=0
+    cancel() {
+      this.Menuname = "";
+      this.Descript = "";
+      this.Costl = 0;
+      this.price = 0;
       var image = document.getElementById("output");
       image.src = "";
-      this.category=null
-      this.choosesize=[]
-      this.$emit('cancel-edit')
-      this.$router.push('/Property/Edit')
-    }
+      this.file= null
+      this.category = null;
+      this.choosesize = [];
+    },
   },
   async created() {
     this.CategoryList = await this.getCategoryResult();
     this.SizeList = await this.getSizeResult();
-    if(this.Edit){
-      this.Menuname=this.foodToEdit.menuName
-      this.Descript=this.foodToEdit.descript
-      this.Costl=this.foodToEdit.cost
-      this.price=this.foodToEdit.price
+    if (this.Edit) {
+      this.Menuname = this.foodToEdit.menuName;
+      this.Descript = this.foodToEdit.descript;
+      this.Costl = this.foodToEdit.cost;
+      this.price = this.foodToEdit.price;
       var image = document.getElementById("output");
       image.src = `http://localhost:8080/menu/get/${this.foodToEdit.menuName}`;
-      this.image_Path=this.foodToEdit.imagePath
-      this.category=this.foodToEdit.category
-      this.choosesize=this.foodToEdit.sizeList
+      this.image_Path = this.foodToEdit.imagePath;
+      this.category = this.foodToEdit.category;
+      this.choosesize = this.foodToEdit.sizeList;
     }
   },
 };

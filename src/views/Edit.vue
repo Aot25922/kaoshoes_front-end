@@ -1,57 +1,43 @@
 <template>
   <div id="edit" class="">
-    <menu-list @edit-data='editData' @delete-data='deleteData' :isEdit='true' :menuList="menuList"/>
+    <p></p>
+    <menu-list @edit-data='editData'  :isEdit='true' v-show="!toEdit" ref="list"  />
+    <edit-form :isEdit="true" v-if="toEdit" :foodToEdit="menuToEdit" @cancel-form="toEdit=false" @reload-data="reload"  />
   </div>
 </template>
 
 <script>
-import MenuList from "../components/MenuList.vue";
-
+import editForm from '../components/Form.vue'
 export default {
 name: "Edit",
 emits: ['edit-mydata'],
   components: {
-    MenuList,
+    editForm,
   },
+
 data(){
   return{
-    menuList: []
+    menuList: [],
+    toEdit : false,
+    menuToEdit : null,
+    componentKey: 0,
   }
 },
 inject :  ["menuUrl"]
 ,
 methods : {
   editData(menu){
-    this.$emit("edit-mydata",menu)
+    this.menuToEdit=menu
+    this.toEdit=true
   },
-  async deleteData(menu){
-     try {
-        await fetch(`${this.menuUrl}/${menu.menuId}`, {
-          method: "DELETE",
-        });
-      } catch (error) {
-        console.log(error);
-      }
-  },
-  async reload(){
-    console.log("reload")
-    this.menuList = await this.getMenuList();
-  },
-  async getMenuList() {
-      try {
-        const res = await fetch(this.menuUrl);
-        const data = res.json();
-        return data;
-      } catch (error) {
-        console.log(`Counld not get! ${error}`);
-      }
-    }
-  },
-  async created() {
-    this.menuList = await this.getMenuList();
+  reload(){
+    console.log("test")
+    this.toEdit=false
+    this.$router.go(0)
   }
-}
 
+}
+}
 </script>
 
 <style>
