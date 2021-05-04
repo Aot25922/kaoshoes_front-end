@@ -1,7 +1,7 @@
 <template>
   <div id="home" class="p-5">
     <cate-food @SelectCate="selectCate"/>
-    <menu-list/>
+    <menu-list :cateId="cateId"/>
   </div>
 </template>
 <script>

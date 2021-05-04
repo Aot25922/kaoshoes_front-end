@@ -31,9 +31,8 @@ methods : {
     this.toEdit=true
   },
   reload(){
-    console.log("test")
     this.toEdit=false
-    this.$router.go(0)
+    this.$refs.list.reload()
   }
 
 }

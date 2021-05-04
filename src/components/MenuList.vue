@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-4 filter drop-shadow-lg md:pt-5">
-    <div class="md:px-2 md:pb-4" v-for="menu in  menuList" :key="menu.id">
+    <div class="md:px-2 md:pb-4" v-for="menu in  menuFilterList" :key="menu.id">
       <div class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative">
         <div class="relative">
           <img :src="`http://localhost:8080/menu/get/${menu.menuName}`"  class="md:rounded" @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
@@ -46,10 +46,12 @@ export default {
   inject: ["menuUrl"],
   props: {
     isEdit: Boolean,
+    cateId: null
   },
   data(){
     return {
       menuList:[],
+      img : ""
     }
   },
   methods : {
@@ -75,6 +77,14 @@ export default {
       }
       this.reload()
   }
+  },
+  computed: {
+    menuFilterList() {
+      if(this.cateId == null) return this.menuList;
+      return this.menuList.filter(list => {
+        return list.category.cateId == this.cateId
+      })
+    }
   },
   async created() {
     this.menuList = await this.getMenuList();
