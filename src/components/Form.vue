@@ -78,13 +78,13 @@
         </div>
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
-        <button v-if="!Edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
+        <button v-if="!edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
           Add
         </button>
-        <button v-if="Edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
+        <button v-if="edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
           Save Edit
         </button>
-        <button v-if="Edit" class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg" @click="cancel;$emit('cancel-form')">
+        <button v-if="edit" class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg" @click="cancel;$emit('cancel-form')">
           Cancel
         </button>
       </div>
@@ -155,18 +155,19 @@ export default {
     async addNewProduct() {
       let product = JSON.stringify({
         productName: this.productName,
-        date: this.date,
+        manuDate: this.date,
         price: this.price,
         descript: this.descript,
         imagePath: this.imagePath,
         brand: this.brand,
         sizeList: this.chooseSize,
       });
+      console.log(this.date)
       let data = new FormData();
       data.append("product", product);
       data.append("multipartFile", this.file);
       try {
-        await fetch("http://localhost:8080/Product", {
+        await fetch("http://localhost:8080/product", {
           method: "POST",
           body: data,
         });
@@ -178,7 +179,7 @@ export default {
     async editProduct() {
       let product = JSON.stringify({
         productName: this.productName,
-        date: this.date,
+        manuDate: this.date,
         price: this.price,
         descript: this.descript,
         imagePath: this.imagePath,
@@ -191,7 +192,7 @@ export default {
       if(this.file!==null){
       editImg.append("multipartFile", this.file);
        try {
-        await fetch(`http://localhost:8080/Product/image/${this.productToEdit.ProductId}`, {
+        await fetch(`http://localhost:8080/product/image/${this.productToEdit.productId}`, {
           method: "PUT",
           body: editImg,
         });
@@ -200,7 +201,7 @@ export default {
       }
       }
       try {
-        await fetch(`http://localhost:8080/Product/${this.productToEdit.ProductId}`, {
+        await fetch(`http://localhost:8080/product/${this.productToEdit.productId}`, {
           method: "PUT",
           body: data,
         });
@@ -234,14 +235,14 @@ export default {
     this.productList = await this.getProductList();
     if (this.edit) {
       this.productName = this.productToEdit.productName;
-      this.date = this.productToEdit.date;
+       this.date = new Date(this.productToEdit.manuDate).toISOString().slice(0, 10);
       this.descript = this.productToEdit.descript;
       this.price = this.productToEdit.price;
       var image = document.getElementById("output");
       image.src = `http://localhost:8080/product/image/${this.productToEdit.productName}`;
       this.image_Path = this.productToEdit.imagePath;
-      this.Brand = this.productToEdit.brand;
-      this.choosesize = this.productToEdit.sizeList;
+      this.brand = this.productToEdit.brand;
+      this.chooseSize = this.productToEdit.sizeList;
 
     }
   },
