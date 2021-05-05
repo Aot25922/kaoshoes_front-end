@@ -1,16 +1,23 @@
 <template>
   <div id="form" class="md:p-5">
-    <form @submit.prevent="submitform()" class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2">
+    <form
+      @click="checkForm()"
+      @submit.prevent="submitForm()"
+      class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2"
+    >
       <div class="md:w-full flex">
         <div class="md:w-1/2 flex flex-col">
           <label for="name">Product Name</label>
-          <input placeholder="Please insert Product name..."
+          <input
+            placeholder="Please insert Product name..."
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
             class="md:w-11/12"
             type="text"
             id="productName"
             name="productName"
-            v-model="productName"/>
+            v-model="productName"
+          />
+          <p v-if="!productNameIsValid" class="md:pt-3">The name field is required</p>
         </div>
         <div class="md:w-1/2 flex flex-col">
           <label for="date">Manufacturer Date</label>
@@ -20,7 +27,9 @@
             type="Date"
             id="date"
             name="date"
-            v-model="date"/>
+            v-model="date"
+          />
+          <p v-if="!dateIsValid" class="md:pt-3">The date field is required</p>
         </div>
       </div>
       <div class="md:w-full flex flex-col">
@@ -30,7 +39,9 @@
           id="descript"
           name="descript"
           placeholder="Please insert Description..."
-          v-model="descript"></textarea>
+          v-model="descript"
+        ></textarea>
+        <p v-if="!descriptIsValid" class="md:pt-3">The descript field is required</p>
       </div>
       <div class="md:w-1/2 flex flex-col">
         <label for="price">Price</label>
@@ -39,20 +50,25 @@
           class="md:w-11/12"
           type="number"
           name="price"
-          v-model="price"/>
+          v-model="price"
+        />
+        <p v-if="!priceIsValid" class="md:pt-3">The price field is required</p>
       </div>
-      <div class="md:w-1/2">
+      <div class="md:w-1/2 md:pt-10">
         <img id="output" width="200" />
         <input
           type="file"
           name="img"
           accept="image/*"
           id="file"
-          @change="onFileChange($event)"/>
+          @change="onFileChange($event)"
+        />
+        <!-- <p v-if="!imagePathIsValid">Must have Image</p> -->
       </div>
       <div class="md:w-1/2">
         <div class="md:w-1/2 flex flex-col">
           <label for="brand">Brand</label>
+          <p v-if="!brandIsValid">Brand is required</p>
           <div class="md:p-3 md:text-lg">
             <select id="brand" class="" name="brand" v-model="brand">
               <option disabled value="">Please select one</option>
@@ -63,8 +79,9 @@
           </div>
         </div>
         <div class="md:w-1/2 flex flex-col">
-          <div v-for="size in sizeList" :key="size.id">
-            <label class="checkbox-inline">
+          <label class="checkbox-inline">Size</label>
+            <p v-if="!sizeIsValid">Size is required at least 1 size</p>
+            <div v-for="size in sizeList" :key="size.id">  
               <input
                 type="checkbox"
                 :id="size.id"
@@ -73,18 +90,33 @@
                 v-model="chooseSize"
               />
               {{ size.size }}
-            </label>
+            
           </div>
         </div>
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
-        <button v-if="!Edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
+        <button
+          v-if="!Edit"
+          type="submit"
+          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+        >
           Add
         </button>
-        <button v-if="Edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
+        <button
+          v-if="Edit"
+          type="submit"
+          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+        >
           Save Edit
         </button>
-        <button v-if="Edit" class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg" @click="cancel;$emit('cancel-form')">
+        <button
+          v-if="Edit"
+          class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg"
+          @click="
+            cancel;
+            $emit('cancel-form');
+          "
+        >
           Cancel
         </button>
       </div>
@@ -98,7 +130,7 @@ export default {
     isEdit: Boolean,
     productToEdit: null,
   },
-  emits: ['cancel-form','reload-data'],
+  emits: ["cancel-form", "reload-data"],
   inject: ["brandUrl", "sizeUrl", "productUrl"],
   data() {
     return {
@@ -114,15 +146,38 @@ export default {
       chooseSize: [],
       file: null,
       edit: this.isEdit,
-      productList: []
+      productList: [],
+      errors: null,
     };
   },
   methods: {
-    submitform() {
+    submitForm() {
       if (this.edit) {
         this.editProduct();
       } else {
         this.addNewProduct();
+      }
+    },
+    checkForm() {
+      const productNameIsValid = !!this.productName;
+      const dateIsValid = this.date;
+      const descriptIsValid = this.descript;
+      const priceIsValid = this.price;
+      const imagePathIsValid = this.imagePath;
+      const brandIsValid = this.brand;
+      const sizeIsValid = this.chooseSize;
+      const formIsValid =
+        productNameIsValid &&
+        dateIsValid &&
+        descriptIsValid &&
+        priceIsValid &&
+        imagePathIsValid &&
+        brandIsValid &&
+        sizeIsValid;
+      if (formIsValid) {
+        console.log("Form submit");
+      } else {
+        console.log("Invalid form");
       }
     },
     async getBrandResult() {
@@ -188,26 +243,32 @@ export default {
       let data = new FormData();
       let editImg = new FormData();
       data.append("product", product);
-      if(this.file!==null){
-      editImg.append("multipartFile", this.file);
-       try {
-        await fetch(`http://localhost:8080/Product/image/${this.productToEdit.ProductId}`, {
-          method: "PUT",
-          body: editImg,
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      if (this.file !== null) {
+        editImg.append("multipartFile", this.file);
+        try {
+          await fetch(
+            `http://localhost:8080/Product/image/${this.productToEdit.ProductId}`,
+            {
+              method: "PUT",
+              body: editImg,
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
       }
       try {
-        await fetch(`http://localhost:8080/Product/${this.productToEdit.ProductId}`, {
-          method: "PUT",
-          body: data,
-        });
+        await fetch(
+          `http://localhost:8080/Product/${this.productToEdit.ProductId}`,
+          {
+            method: "PUT",
+            body: data,
+          }
+        );
       } catch (error) {
         console.log(error);
       }
-      this.$emit("reload-data")
+      this.$emit("reload-data");
       this.cancel();
     },
     onFileChange(event) {
@@ -223,7 +284,7 @@ export default {
       this.price = 0;
       var image = document.getElementById("output");
       image.src = "";
-      this.file= null
+      this.file = null;
       this.brand = null;
       this.chooseSize = [];
     },
@@ -240,9 +301,8 @@ export default {
       var image = document.getElementById("output");
       image.src = `http://localhost:8080/product/image/${this.productToEdit.productName}`;
       this.image_Path = this.productToEdit.imagePath;
-      this.Brand = this.productToEdit.brand;
-      this.choosesize = this.productToEdit.sizeList;
-
+      this.brand = this.productToEdit.brand;
+      this.chooseSize = this.productToEdit.sizeList;
     }
   },
 };
@@ -270,6 +330,10 @@ option {
 }
 h3 {
   font-size: large;
+  font-weight: 600;
+}
+p {
+  color: red;
   font-weight: 600;
 }
 </style>
