@@ -1,13 +1,13 @@
 <template>
   <div class="grid grid-cols-4 filter drop-shadow-lg md:pt-5">
     <div class="md:px-2 md:pb-4" v-for="product in productFilterList" :key="product.id">
-      <div class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative" :class="{'cursor-pointer':showDetail}">
+      <div class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative" :class="{'cursor-pointer':showDetail}" @click="productInfo(product)">
         <div class="relative">
           <img :src="`http://localhost:8080/product/image/${product.productName}`"  class="md:rounded" @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
 
           <span class="md:absolute md:bottom-0 md:right-0 bg-cadet-dark text-white md:p-2 md:rounded">
             <div class="inline-flex px-1" >
-              {{ product.manuDate }}
+              {{ new Date(product.manuDate).toISOString().slice(0, 10) }}
             </div>
           </span>
           <button class="md:absolute md:-top-2 md:-right-2 hover:opacity-50" @click="$emit('edit-data', product)" v-if="isEdit">
@@ -37,7 +37,7 @@
 <script>
 export default {
   name: "productList",
-  emits: ["edit-data", "delete-data"],
+  emits: ["edit-data", "delete-data","show-detail"],
   inject: ["productUrl"],
   props: {
     isEdit: Boolean,
@@ -50,6 +50,12 @@ export default {
     }
   },
   methods: {
+    productInfo(product){
+      if(!this.showDetail){
+        return;
+      }
+      this.$emit("show-detail",product)
+    },
     async reload(){
       this.productList = await this.getProductList();
     },
