@@ -105,7 +105,7 @@ export default {
       productName: "",
       descript: "",
       imagePath: "",
-      date: null,
+      date: "",
       mySize: [],
       brandList: [],
       sizeList: [],
@@ -114,6 +114,7 @@ export default {
       chooseSize: [],
       file: null,
       edit: this.isEdit,
+      productList: []
     };
   },
   methods: {
@@ -162,7 +163,7 @@ export default {
         sizeList: this.chooseSize,
       });
       let data = new FormData();
-      data.append("Product", product);
+      data.append("product", product);
       data.append("multipartFile", this.file);
       try {
         await fetch("http://localhost:8080/Product", {
@@ -186,7 +187,7 @@ export default {
       });
       let data = new FormData();
       let editImg = new FormData();
-      data.append("Product", product);
+      data.append("product", product);
       if(this.file!==null){
       editImg.append("multipartFile", this.file);
        try {
@@ -217,7 +218,7 @@ export default {
     },
     cancel() {
       this.productName = "";
-      this.date = null;
+      this.date = "";
       this.descript = "";
       this.price = 0;
       var image = document.getElementById("output");
@@ -230,7 +231,8 @@ export default {
   async created() {
     this.brandList = await this.getBrandResult();
     this.sizeList = await this.getSizeResult();
-    if (this.Edit) {
+    this.productList = await this.getProductList();
+    if (this.edit) {
       this.productName = this.productToEdit.productName;
       this.date = this.productToEdit.date;
       this.descript = this.productToEdit.descript;
