@@ -34,8 +34,8 @@
           style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
           class="w-11/12"
           type="number"
-          name="Costl"
-          v-model="Costl"
+          name="cost"
+          v-model="cost"
         />
       </div>
       <div class="md:w-1/2 flex flex-col">
@@ -129,7 +129,7 @@ export default {
     return {
       Menuname: "",
       Descript: "",
-      Costl: 0,
+      cost: 0,
       Image_Path: "",
       mysize: [],
       CategoryList: [],
@@ -172,7 +172,7 @@ export default {
         menuName: this.Menuname,
         price: this.price,
         descript: this.Descript,
-        cost: this.Costl,
+        cost: this.cost,
         imagePath: this.Image_Path,
         category: this.category,
         sizeList: this.choosesize,
@@ -195,7 +195,7 @@ export default {
         menuName: this.Menuname,
         price: this.price,
         descript: this.Descript,
-        cost: this.Costl,
+        cost: this.cost,
         imagePath: this.Image_Path,
         category: this.category,
         sizeList: this.choosesize,
@@ -234,7 +234,7 @@ export default {
     cancel() {
       this.Menuname = "";
       this.Descript = "";
-      this.Costl = 0;
+      this.cost = 0;
       this.price = 0;
       var image = document.getElementById("output");
       image.src = "";
@@ -249,7 +249,7 @@ export default {
     if (this.Edit) {
       this.Menuname = this.foodToEdit.menuName;
       this.Descript = this.foodToEdit.descript;
-      this.Costl = this.foodToEdit.cost;
+      this.cost = this.foodToEdit.cost;
       this.price = this.foodToEdit.price;
       var image = document.getElementById("output");
       image.src = `http://localhost:8080/menu/get/${this.foodToEdit.menuName}`;
@@ -272,7 +272,7 @@ input {
 }
 textarea {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 2%;
+  padding: 1vw;
 }
 button {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

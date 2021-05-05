@@ -1,5 +1,5 @@
 <template>
-  <div id="edit" class="">
+  <div id="edit">
     <p></p>
     <menu-list @edit-data='editData'  :isEdit='true' v-show="!toEdit" ref="list"  />
     <edit-form :isEdit="true" v-if="toEdit" :foodToEdit="menuToEdit" @cancel-form="toEdit=false" @reload-data="reload"  />
@@ -38,7 +38,3 @@ methods : {
 }
 }
 </script>
-
-<style>
-
-</style>

@@ -23,7 +23,7 @@
           <p class="sm:text-right sm:w-1/3">{{ menu.price }}฿</p>
         </div>
         <p class="text-gray-500 sm:text-sm sm:break-all des-text shortDes">
-          {{ menu.descript }}
+          &emsp;&emsp;{{ menu.descript }}
         </p>
         <div class='flex justify-end mt-2 hover:opacity-50'>
           <button class="" @click="deleteData(menu)" v-if="isEdit">
