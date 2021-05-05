@@ -1,42 +1,36 @@
 <template>
   <div id="form" class="md:p-5">
-    <form
-      @submit.prevent="submitform()"
-      class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2"
-    >
+    <form @submit.prevent="submitform()" class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2">
       <div class="md:w-full flex">
         <div class="md:w-1/2 flex flex-col">
           <label for="name">Product Name</label>
-          <input
+          <input placeholder="Please insert Product name..."
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
             class="md:w-11/12"
             type="text"
-            id="Productname"
-            name="Productname"
-            v-model="Productname"
-          />
+            id="productName"
+            name="productName"
+            v-model="productName"/>
+        </div>
+        <div class="md:w-1/2 flex flex-col">
+          <label for="date">Manufacturer Date</label>
+          <input
+            style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
+            class="lg:w-1/3"
+            type="Date"
+            id="date"
+            name="date"
+            v-model="date"/>
         </div>
       </div>
       <div class="md:w-full flex flex-col">
         <label for="Des">Product Description</label>
         <textarea
           type="text"
-          id="Descript"
-          name="Descript"
-          placeholder="Please insert description..."
-          v-model="Descript"
-        >
-        </textarea>
-      </div>
-      <div class="md:w-1/2 flex flex-col">
-        <label for="cost">Cost</label>
-        <input
-          style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-          class="w-11/12"
-          type="number"
-          name="cost"
-          v-model="cost"
-        />
+          id="descript"
+          name="descript"
+          placeholder="Please insert Description..."
+          v-model="descript"></textarea>
       </div>
       <div class="md:w-1/2 flex flex-col">
         <label for="price">Price</label>
@@ -45,8 +39,7 @@
           class="md:w-11/12"
           type="number"
           name="price"
-          v-model="price"
-        />
+          v-model="price"/>
       </div>
       <div class="md:w-1/2">
         <img id="output" width="200" />
@@ -55,34 +48,29 @@
           name="img"
           accept="image/*"
           id="file"
-          @change="onFileChange($event)"
-        />
+          @change="onFileChange($event)"/>
       </div>
       <div class="md:w-1/2">
         <div class="md:w-1/2 flex flex-col">
-          <label for="category">Category</label>
+          <label for="brand">Brand</label>
           <div class="md:p-3 md:text-lg">
-            <select id="category" class="" name="category" v-model="category">
+            <select id="brand" class="" name="brand" v-model="brand">
               <option disabled value="">Please select one</option>
-              <option
-                :value="category"
-                v-for="category in CategoryList"
-                :key="category.id"
-              >
-                {{ category.cateName }}
+              <option :value="brand" v-for="brand in brandList" :key="brand.id">
+                {{ brand.brandName }}
               </option>
             </select>
           </div>
         </div>
         <div class="md:w-1/2 flex flex-col">
-          <div v-for="size in SizeList" :key="size.id">
+          <div v-for="size in sizeList" :key="size.id">
             <label class="checkbox-inline">
               <input
                 type="checkbox"
                 :id="size.id"
                 name="size"
                 :value="size"
-                v-model="choosesize"
+                v-model="chooseSize"
               />
               {{ size.size }}
             </label>
@@ -90,25 +78,13 @@
         </div>
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
-        <button
-          v-if="!Edit"
-          type="submit"
-          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
-        >
+        <button v-if="!Edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
           Add
         </button>
-        <button
-          v-if="Edit"
-          type="submit"
-          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
-        >
+        <button v-if="Edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
           Save Edit
         </button>
-        <button
-          v-if="Edit"
-          class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg"
-          @click="cancel;$emit('cancel-form')"
-        >
+        <button v-if="Edit" class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg" @click="cancel;$emit('cancel-form')">
           Cancel
         </button>
       </div>
@@ -119,38 +95,38 @@
 export default {
   name: "Form",
   props: {
-    colors: null,
     isEdit: Boolean,
-    foodToEdit: null,
+    productToEdit: null,
   },
   emits: ['cancel-form','reload-data'],
-  inject: ["categoryUrl", "sizeUrl"],
+  inject: ["brandUrl", "sizeUrl", "productUrl"],
   data() {
     return {
-      Productname: "",
-      Descript: "",
-      Image_Path: "",
-      mysize: [],
-      CategoryList: [],
-      SizeList: [],
-      category: null,
+      productName: "",
+      descript: "",
+      imagePath: "",
+      date: null,
+      mySize: [],
+      brandList: [],
+      sizeList: [],
+      brand: null,
       price: 0,
-      choosesize: [],
+      chooseSize: [],
       file: null,
-      Edit: this.isEdit,
+      edit: this.isEdit,
     };
   },
   methods: {
     submitform() {
-      if (this.Edit) {
+      if (this.edit) {
         this.editProduct();
       } else {
         this.addNewProduct();
       }
     },
-    async getCategoryResult() {
+    async getBrandResult() {
       try {
-        const res = await fetch(this.categoryUrl);
+        const res = await fetch(this.brandUrl);
         const data = res.json();
         return data;
       } catch (error) {
@@ -166,17 +142,27 @@ export default {
         console.log(`Counld not get! ${error}`);
       }
     },
+    async getProductList() {
+      try {
+        const res = await fetch(this.productUrl);
+        const data = res.json();
+        return data;
+      } catch (error) {
+        console.log(`Counld not get! ${error}`);
+      }
+    },
     async addNewProduct() {
-      let Product = JSON.stringify({
-        ProductName: this.Productname,
+      let product = JSON.stringify({
+        productName: this.productName,
+        date: this.date,
         price: this.price,
-        descript: this.Descript,
-        imagePath: this.Image_Path,
-        category: this.category,
-        sizeList: this.choosesize,
+        descript: this.descript,
+        imagePath: this.imagePath,
+        brand: this.brand,
+        sizeList: this.chooseSize,
       });
       let data = new FormData();
-      data.append("Product", Product);
+      data.append("Product", product);
       data.append("multipartFile", this.file);
       try {
         await fetch("http://localhost:8080/Product", {
@@ -189,21 +175,22 @@ export default {
       this.cancel();
     },
     async editProduct() {
-      let Product = JSON.stringify({
-        ProductName: this.Productname,
+      let product = JSON.stringify({
+        productName: this.productName,
+        date: this.date,
         price: this.price,
-        descript: this.Descript,
-        imagePath: this.Image_Path,
-        category: this.category,
-        sizeList: this.choosesize,
+        descript: this.descript,
+        imagePath: this.imagePath,
+        brand: this.brand,
+        sizeList: this.chooseSize,
       });
       let data = new FormData();
       let editImg = new FormData();
-      data.append("Product", Product);
+      data.append("Product", product);
       if(this.file!==null){
       editImg.append("multipartFile", this.file);
        try {
-        await fetch(`http://localhost:8080/Product/image/${this.foodToEdit.ProductId}`, {
+        await fetch(`http://localhost:8080/Product/image/${this.productToEdit.ProductId}`, {
           method: "PUT",
           body: editImg,
         });
@@ -212,7 +199,7 @@ export default {
       }
       }
       try {
-        await fetch(`http://localhost:8080/Product/${this.foodToEdit.ProductId}`, {
+        await fetch(`http://localhost:8080/Product/${this.productToEdit.ProductId}`, {
           method: "PUT",
           body: data,
         });
@@ -229,30 +216,30 @@ export default {
       this.imagePath = this.file.name;
     },
     cancel() {
-      this.Productname = "";
-      this.Descript = "";
-      this.cost = 0;
+      this.productName = "";
+      this.date = null;
+      this.descript = "";
       this.price = 0;
       var image = document.getElementById("output");
       image.src = "";
       this.file= null
-      this.category = null;
-      this.choosesize = [];
+      this.brand = null;
+      this.chooseSize = [];
     },
   },
   async created() {
-    this.CategoryList = await this.getCategoryResult();
-    this.SizeList = await this.getSizeResult();
+    this.brandList = await this.getBrandResult();
+    this.sizeList = await this.getSizeResult();
     if (this.Edit) {
-      this.Productname = this.foodToEdit.ProductName;
-      this.Descript = this.foodToEdit.descript;
-      this.cost = this.foodToEdit.cost;
-      this.price = this.foodToEdit.price;
+      this.productName = this.productToEdit.productName;
+      this.date = this.productToEdit.date;
+      this.descript = this.productToEdit.descript;
+      this.price = this.productToEdit.price;
       var image = document.getElementById("output");
-      image.src = `http://localhost:8080/Product/get/${this.foodToEdit.ProductName}`;
-      this.image_Path = this.foodToEdit.imagePath;
-      this.category = this.foodToEdit.category;
-      this.choosesize = this.foodToEdit.sizeList;
+      image.src = `http://localhost:8080/Product/get/${this.productToEdit.productName}`;
+      this.imagePath = this.productToEdit.imagePath;
+      this.brand = this.productToEdit.brand;
+      this.chooseSize = this.productToEdit.sizeList;
     }
   },
 };

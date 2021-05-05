@@ -30,7 +30,6 @@ const routes = [
     name: 'Team',
     component: Team,
   }
-
 ]
 
 const router = createRouter({
