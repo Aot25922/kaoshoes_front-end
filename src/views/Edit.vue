@@ -1,44 +1,45 @@
 <template>
+
   <div id="edit" class="">
     <p></p>
-    <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit" ref="list"  />
+    <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit"  />
     <edit-form :isEdit="true" v-if="toEdit" :productToEdit="productToedit" @cancel-form="toEdit=false" @reload-data="reload"  />
   </div>
 </template>
 
 <script>
-import editForm from '../components/Form.vue'
+import editForm from "../components/Form.vue";
 export default {
-name: "Edit",
-emits: ['edit-mydata'],
+  name: "Edit",
+  emits: ["edit-mydata"],
   components: {
     editForm,
   },
 
-data(){
-  return{
-    productList: [],
-    toEdit : false,
-    productToedit : null,
-    componentKey: 0,
-  }
-},
-inject :  ["productUrl"]
-,
-methods : {
-  editData(product){
-    this.productToedit=product
-    this.toEdit=true
+  data() {
+    return {
+      productList: [],
+      toEdit: false,
+      productToedit: null,
+    };
   },
-  reload(){
-    this.toEdit=false
-    this.$refs.list.reload()
-  }
+    methods: {
+    editData(product) {
+      this.productToedit = product;
+      this.toEdit = true;
+    },
+    reload() {
+      this.toEdit = false;
+      this.$router.go(0);
+    },
+  },
+}
 
-}
-}
 </script>
 
 <style>
 
 </style>
+
+
+

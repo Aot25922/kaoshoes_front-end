@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <product-form />
   </div>
 </template>
@@ -13,7 +13,3 @@ name: "Add",
   },
 }
 </script>
-
-<style>
-
-</style>
