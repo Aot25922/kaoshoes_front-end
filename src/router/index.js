@@ -28,9 +28,8 @@ const routes = [
   {
     path: '/Team',
     name: 'Team',
-    component: Team
+    component: Team,
   }
-
 ]
 
 const router = createRouter({
