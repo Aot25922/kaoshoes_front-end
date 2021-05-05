@@ -1,7 +1,7 @@
 <template>
   <div id="home" class="p-5">
     <product-brand @SelectBrand="selectBrand"/>
-    <product-list :brandId="brandId"/>
+    <product-list :brandId="brandId" :showDetail="true" />
   </div>
 </template>
 <script>

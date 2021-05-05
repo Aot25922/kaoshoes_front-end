@@ -1,7 +1,7 @@
 <template>
   <div id="edit" class="">
     <p></p>
-    <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit" ref="list"  />
+    <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit"  />
     <edit-form :isEdit="true" v-if="toEdit" :productToEdit="productToedit" @cancel-form="toEdit=false" @reload-data="reload"  />
   </div>
 </template>
@@ -32,7 +32,7 @@ methods : {
   },
   reload(){
     this.toEdit=false
-    this.$refs.list.reload()
+    this.$router.go(0)
   }
 
 }

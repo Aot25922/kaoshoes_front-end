@@ -190,13 +190,14 @@ export default {
       this.cancel();
     },
     async editMenu() {
+      console.log(this.Brand)
       let Menu = JSON.stringify({
         ProductName: this.ProductName,
         price: this.price,
         descript: this.Descript,
         cost: this.Cost,
         imagePath: this.Image_Path,
-        Brand: this.Brand,
+        brand: this.Brand,
         sizeList: this.choosesize,
       });
       let data = new FormData();
@@ -251,7 +252,7 @@ export default {
       this.Descript = this.productToEdit.descript;
       this.price = this.productToEdit.price;
       var image = document.getElementById("output");
-      image.src = `http://localhost:8080/product/image/${this.productToEdit.ProductName}`;
+      image.src = `http://localhost:8080/product/image/${this.productToEdit.productName}`;
       this.image_Path = this.productToEdit.imagePath;
       this.Brand = this.productToEdit.brand;
       this.choosesize = this.productToEdit.sizeList;
