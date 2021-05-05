@@ -11,9 +11,9 @@
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
             class="md:w-11/12"
             type="text"
-            id="Menuname"
-            name="Menuname"
-            v-model="Menuname"
+            id="ProductName"
+            name="ProductName"
+            v-model="ProductName"
           />
         </div>
       </div>
@@ -27,16 +27,6 @@
           v-model="Descript"
         >
         </textarea>
-      </div>
-      <div class="md:w-1/2 flex flex-col">
-        <label for="cost">Cost</label>
-        <input
-          style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-          class="w-11/12"
-          type="number"
-          name="Costl"
-          v-model="Costl"
-        />
       </div>
       <div class="md:w-1/2 flex flex-col">
         <label for="price">Price</label>
@@ -60,16 +50,16 @@
       </div>
       <div class="md:w-1/2">
         <div class="md:w-1/2 flex flex-col">
-          <label for="category">Category</label>
+          <label for="Brand">Brand</label>
           <div class="md:p-3 md:text-lg">
-            <select id="category" class="" name="category" v-model="category">
+            <select id="Brand" class="" name="Brand" v-model="Brand">
               <option disabled value="">Please select one</option>
               <option
-                :value="category"
-                v-for="category in CategoryList"
-                :key="category.id"
+                :value="Brand"
+                v-for="Brand in BrandList"
+                :key="Brand.id"
               >
-                {{ category.cateName }}
+                {{ Brand.brandName }}
               </option>
             </select>
           </div>
@@ -119,26 +109,26 @@
 export default {
   name: "Form",
   props: {
-    colors: null,
     isEdit: Boolean,
-    foodToEdit: null,
+    productToEdit: null,
   },
   emits: ['cancel-form','reload-data'],
-  inject: ["categoryUrl", "sizeUrl"],
+  inject: ["brandUrl", "sizeUrl","productUrl"],
   data() {
     return {
-      Menuname: "",
+      ProductName: "",
       Descript: "",
-      Costl: 0,
+      Cost: 0,
       Image_Path: "",
       mysize: [],
-      CategoryList: [],
+      BrandList: [],
       SizeList: [],
-      category: null,
+      Brand: null,
       price: 0,
       choosesize: [],
       file: null,
       Edit: this.isEdit,
+      productList:[],
     };
   },
   methods: {
@@ -148,10 +138,11 @@ export default {
       } else {
         this.addNewMenu();
       }
-    },
-    async getCategoryResult() {
+    }
+    ,
+    async getBrandResult() {
       try {
-        const res = await fetch(this.categoryUrl);
+        const res = await fetch(this.brandUrl);
         const data = res.json();
         return data;
       } catch (error) {
@@ -167,21 +158,29 @@ export default {
         console.log(`Counld not get! ${error}`);
       }
     },
+     async getProductList() {
+      try {
+        const res = await fetch(this.productUrl);
+        const data = res.json();
+        return data;
+      } catch (error) {
+        console.log(`Counld not get! ${error}`);
+      }
+    },
     async addNewMenu() {
       let Menu = JSON.stringify({
-        menuName: this.Menuname,
+        ProductName: this.productName,
         price: this.price,
         descript: this.Descript,
-        cost: this.Costl,
         imagePath: this.Image_Path,
-        category: this.category,
+        Brand: this.Brand,
         sizeList: this.choosesize,
       });
       let data = new FormData();
       data.append("menu", Menu);
       data.append("multipartFile", this.file);
       try {
-        await fetch("http://localhost:8080/menu", {
+        await fetch("http://localhost:8080/product", {
           method: "POST",
           body: data,
         });
@@ -192,12 +191,12 @@ export default {
     },
     async editMenu() {
       let Menu = JSON.stringify({
-        menuName: this.Menuname,
+        ProductName: this.ProductName,
         price: this.price,
         descript: this.Descript,
-        cost: this.Costl,
+        cost: this.Cost,
         imagePath: this.Image_Path,
-        category: this.category,
+        Brand: this.Brand,
         sizeList: this.choosesize,
       });
       let data = new FormData();
@@ -206,7 +205,7 @@ export default {
       if(this.file!==null){
       editImg.append("multipartFile", this.file);
        try {
-        await fetch(`http://localhost:8080/menu/image/${this.foodToEdit.menuId}`, {
+        await fetch(`http://localhost:8080/product/image/${this.productToEdit.productId}`, {
           method: "PUT",
           body: editImg,
         });
@@ -215,7 +214,7 @@ export default {
       }
       }
       try {
-        await fetch(`http://localhost:8080/menu/${this.foodToEdit.menuId}`, {
+        await fetch(`http://localhost:8080/product/${this.productToEdit.productId}`, {
           method: "PUT",
           body: data,
         });
@@ -232,30 +231,30 @@ export default {
       this.imagePath = this.file.name;
     },
     cancel() {
-      this.Menuname = "";
+      this.ProductName = "";
       this.Descript = "";
-      this.Costl = 0;
+      this.Cost = 0;
       this.price = 0;
       var image = document.getElementById("output");
       image.src = "";
       this.file= null
-      this.category = null;
+      this.Brand = null;
       this.choosesize = [];
     },
   },
   async created() {
-    this.CategoryList = await this.getCategoryResult();
+    this.BrandList = await this.getBrandResult();
     this.SizeList = await this.getSizeResult();
+    this.productList = await this.getProductList();
     if (this.Edit) {
-      this.Menuname = this.foodToEdit.menuName;
-      this.Descript = this.foodToEdit.descript;
-      this.Costl = this.foodToEdit.cost;
-      this.price = this.foodToEdit.price;
+      this.ProductName = this.productToEdit.productName;
+      this.Descript = this.productToEdit.descript;
+      this.price = this.productToEdit.price;
       var image = document.getElementById("output");
-      image.src = `http://localhost:8080/menu/get/${this.foodToEdit.menuName}`;
-      this.image_Path = this.foodToEdit.imagePath;
-      this.category = this.foodToEdit.category;
-      this.choosesize = this.foodToEdit.sizeList;
+      image.src = `http://localhost:8080/product/image/${this.productToEdit.ProductName}`;
+      this.image_Path = this.productToEdit.imagePath;
+      this.Brand = this.productToEdit.brand;
+      this.choosesize = this.productToEdit.sizeList;
     }
   },
 };
