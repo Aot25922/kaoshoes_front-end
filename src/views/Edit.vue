@@ -1,8 +1,8 @@
 <template>
   <div id="edit">
     <p></p>
-    <menu-list @edit-data='editData'  :isEdit='true' v-show="!toEdit" ref="list"  />
-    <edit-form :isEdit="true" v-if="toEdit" :foodToEdit="menuToEdit" @cancel-form="toEdit=false" @reload-data="reload"  />
+    <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit" ref="list"  />
+    <edit-form :isEdit="true" v-if="toEdit" :productToEdit="productToedit" @cancel-form="toEdit=false" @reload-data="reload"  />
   </div>
 </template>
 
@@ -17,17 +17,17 @@ emits: ['edit-mydata'],
 
 data(){
   return{
-    menuList: [],
+    productList: [],
     toEdit : false,
-    menuToEdit : null,
+    productToedit : null,
     componentKey: 0,
   }
 },
-inject :  ["menuUrl"]
+inject :  ["productUrl"]
 ,
 methods : {
-  editData(menu){
-    this.menuToEdit=menu
+  editData(product){
+    this.productToedit=product
     this.toEdit=true
   },
   reload(){

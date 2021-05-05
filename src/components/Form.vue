@@ -11,9 +11,9 @@
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
             class="md:w-11/12"
             type="text"
-            id="Menuname"
-            name="Menuname"
-            v-model="Menuname"
+            id="Productname"
+            name="Productname"
+            v-model="Productname"
           />
         </div>
       </div>
@@ -127,9 +127,8 @@ export default {
   inject: ["categoryUrl", "sizeUrl"],
   data() {
     return {
-      Menuname: "",
+      Productname: "",
       Descript: "",
-      cost: 0,
       Image_Path: "",
       mysize: [],
       CategoryList: [],
@@ -144,9 +143,9 @@ export default {
   methods: {
     submitform() {
       if (this.Edit) {
-        this.editMenu();
+        this.editProduct();
       } else {
-        this.addNewMenu();
+        this.addNewProduct();
       }
     },
     async getCategoryResult() {
@@ -167,21 +166,20 @@ export default {
         console.log(`Counld not get! ${error}`);
       }
     },
-    async addNewMenu() {
-      let Menu = JSON.stringify({
-        menuName: this.Menuname,
+    async addNewProduct() {
+      let Product = JSON.stringify({
+        ProductName: this.Productname,
         price: this.price,
         descript: this.Descript,
-        cost: this.cost,
         imagePath: this.Image_Path,
         category: this.category,
         sizeList: this.choosesize,
       });
       let data = new FormData();
-      data.append("menu", Menu);
+      data.append("Product", Product);
       data.append("multipartFile", this.file);
       try {
-        await fetch("http://localhost:8080/menu", {
+        await fetch("http://localhost:8080/Product", {
           method: "POST",
           body: data,
         });
@@ -190,23 +188,22 @@ export default {
       }
       this.cancel();
     },
-    async editMenu() {
-      let Menu = JSON.stringify({
-        menuName: this.Menuname,
+    async editProduct() {
+      let Product = JSON.stringify({
+        ProductName: this.Productname,
         price: this.price,
         descript: this.Descript,
-        cost: this.cost,
         imagePath: this.Image_Path,
         category: this.category,
         sizeList: this.choosesize,
       });
       let data = new FormData();
       let editImg = new FormData();
-      data.append("menu", Menu);
+      data.append("Product", Product);
       if(this.file!==null){
       editImg.append("multipartFile", this.file);
        try {
-        await fetch(`http://localhost:8080/menu/image/${this.foodToEdit.menuId}`, {
+        await fetch(`http://localhost:8080/Product/image/${this.foodToEdit.ProductId}`, {
           method: "PUT",
           body: editImg,
         });
@@ -215,7 +212,7 @@ export default {
       }
       }
       try {
-        await fetch(`http://localhost:8080/menu/${this.foodToEdit.menuId}`, {
+        await fetch(`http://localhost:8080/Product/${this.foodToEdit.ProductId}`, {
           method: "PUT",
           body: data,
         });
@@ -232,7 +229,7 @@ export default {
       this.imagePath = this.file.name;
     },
     cancel() {
-      this.Menuname = "";
+      this.Productname = "";
       this.Descript = "";
       this.cost = 0;
       this.price = 0;
@@ -247,12 +244,12 @@ export default {
     this.CategoryList = await this.getCategoryResult();
     this.SizeList = await this.getSizeResult();
     if (this.Edit) {
-      this.Menuname = this.foodToEdit.menuName;
+      this.Productname = this.foodToEdit.ProductName;
       this.Descript = this.foodToEdit.descript;
       this.cost = this.foodToEdit.cost;
       this.price = this.foodToEdit.price;
       var image = document.getElementById("output");
-      image.src = `http://localhost:8080/menu/get/${this.foodToEdit.menuName}`;
+      image.src = `http://localhost:8080/Product/get/${this.foodToEdit.ProductName}`;
       this.image_Path = this.foodToEdit.imagePath;
       this.category = this.foodToEdit.category;
       this.choosesize = this.foodToEdit.sizeList;

@@ -1,45 +1,28 @@
 <template>
   <div id="home" class="p-5">
-    <cate-food @SelectCate="selectCate"/>
-    <menu-list :cateId="cateId"/>
+    <product-brand @SelectBrand="selectBrand"/>
+    <product-list :brandId="brandId"/>
   </div>
 </template>
 <script>
-import CateFood from "../components/CateFood.vue";
+import productBrand from "../components/ProductBrand.vue";
 
 export default {
   name: "Home",
-  inject: ["menuUrl"],
+  inject: ["productUrl"],
   components: {
-    CateFood,
+    productBrand,
   },
   data() {
     return {
-      cateId : null,
+      brandId : null,
       menuList: [],
     };
   },
   methods: {
-    async getMenuList() {
-      try {
-        const res = await fetch(this.menuUrl);
-        const data = res.json();
-        return data;
-      } catch (error) {
-        console.log(`Counld not get! ${error}`);
-      }
-    },
-    selectCate(id){
-      this.cateId = id;
+    selectBrand(id){
+      this.brandId = id;
     }
   },
-  // computed: {
-  //   menuFilterList() {
-  //     if(this.cateId == null) return this.menuList;
-  //     return this.menuList.filter(list => {
-  //       return list.category.cateId == this.cateId
-  //     })
-  //   }
-  // }
 }
 </script>

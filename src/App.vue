@@ -13,14 +13,14 @@ export default {
   name: "App",
   provide(){
     return{
-      menuUrl : `${this.dbUrl}/menu`,
-      categoryUrl : `${this.dbUrl}/category`,
+      productUrl : `${this.dbUrl}/product`,
+      brandUrl : `${this.dbUrl}/brand`,
       sizeUrl : `${this.dbUrl}/size`
     }
   },
   data(){
     return {
-      dbUrl : "http://kaofood.ddns.net:8080"
+      dbUrl : "http://localhost:8080/"
     }
   }
 };
