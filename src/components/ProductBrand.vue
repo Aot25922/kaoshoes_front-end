@@ -1,12 +1,9 @@
 <template>
   <div id="productbrand" class="grid grid-cols-4 gap-4">
     <button class="navCate cursor-pointer hover:bg-cadet focus:bg-cadet" v-on:click="$emit('SelectBrand',null)">
-      Main Menu
+      All Products
     </button>
-    <button class="navCate cursor-pointer hover:bg-cadet focus:bg-cadet " 
-    v-for="brand in brandList" 
-    :key="brand.brandId"
-    v-on:click="$emit('SelectBrand',brand.brandId)">
+    <button class="navCate cursor-pointer hover:bg-cadet focus:bg-cadet" v-for="brand in brandList" :key="brand.brandId" v-on:click="$emit('SelectBrand',brand.brandId)">
       {{ brand.brandName }}
     </button>
   </div>
