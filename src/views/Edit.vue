@@ -1,9 +1,10 @@
 <template>
 
   <div id="edit">
-    <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit"  />
-    <edit-form :isEdit="true" v-if="toEdit" :productToEdit="productToedit" @cancel-form="toEdit=false" @reload-data="reload"  />
+    <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit"  @error-type="pageError" v-if="!error"/>
+    <edit-form :isEdit="true" v-if="toEdit&&!error" :productToEdit="productToedit" @cancel-form="toEdit=false" @reload-data="reload"  />
   </div>
+  <error-detail v-if="error" :errorType="errorType"/>
 </template>
 
 <script>
@@ -20,9 +21,16 @@ export default {
       productList: [],
       toEdit: false,
       productToedit: null,
+      error:false,
+      errorType:null
     };
   },
     methods: {
+     pageError(e){
+      this.error=true;
+      console.log(e)
+      this.errorType=e
+    },  
     editData(product) {
       this.productToedit = product;
       this.toEdit = true;

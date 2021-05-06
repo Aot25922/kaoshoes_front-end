@@ -60,6 +60,8 @@
           name="price"
           v-model="price"
           @blur="checkPrice"
+          min="1"
+          max="1000000"
         />
         <p class="text-red" v-if="!validatePrice">
           product price cannot be empty!
@@ -238,7 +240,14 @@ export default {
     checkName() {
       if (this.productName == "") {
         this.validateName = false;
-      } else {
+      }
+      else {
+        for(let i in this.productList){
+          if(this.productName==i.productName){
+            this.validateName = false;
+            return;
+          }
+        }
         this.validateName = true;
       }
     },
