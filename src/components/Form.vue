@@ -1,16 +1,25 @@
 <template>
   <div id="form" class="md:p-5">
-    <form @submit.prevent="submitform()" class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2">
+    <form
+      @submit.prevent="submitform()"
+
+      class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2"
+    >
       <div class="md:w-full flex">
         <div class="md:w-1/2 flex flex-col">
           <label for="name">Product Name</label>
-          <input placeholder="Please insert Product name..."
+          <input
+            placeholder="Please insert Product name..."
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
             class="md:w-11/12"
             type="text"
             id="productName"
             name="productName"
-            v-model="productName"/>
+            v-model="productName"
+            @blur="checkName"
+          />
+          <p class="text-red" v-if="!validateName">product name cannot be empty!</p>
+
         </div>
         <div class="md:w-1/2 flex flex-col">
           <label for="date">Manufacturer Date</label>
@@ -20,7 +29,10 @@
             type="Date"
             id="date"
             name="date"
-            v-model="date"/>
+            v-model="date"
+            @blur="checkDate"
+          />
+          <p class="text-red" v-if="!validateDate">product manufacturer date cannot be empty!</p>
         </div>
       </div>
       <div class="md:w-full flex flex-col">
@@ -30,7 +42,10 @@
           id="descript"
           name="descript"
           placeholder="Please insert Description..."
-          v-model="descript"></textarea>
+          v-model="descript"
+          @blur="checkDescript"
+        ></textarea>
+        <p class="text-red" v-if="!validateDescript">product description cannot be empty!</p>
       </div>
       <div class="md:w-1/2 flex flex-col">
         <label for="price">Price</label>
@@ -39,52 +54,77 @@
           class="md:w-11/12"
           type="number"
           name="price"
-          v-model="price"/>
+          v-model="price"
+          @blur="checkPrice"
+        />
+        <p class="text-red" v-if="!validatePrice">product price cannot be empty!</p>
       </div>
-      <div class="md:w-1/2">
+      <div class="md:w-1/2 md:pt-10">
         <img id="output" width="200" />
         <input
           type="file"
           name="img"
           accept="image/*"
           id="file"
-          @change="onFileChange($event)"/>
+          @change="onFileChange($event)"
+        />
+        <p class="text-red" v-if="!validateFile">File cannot be empty!</p>
       </div>
       <div class="md:w-1/2">
         <div class="md:w-1/2 flex flex-col">
           <label for="brand">Brand</label>
+          <p v-if="!brandIsValid">Brand is required</p>
           <div class="md:p-3 md:text-lg">
-            <select id="brand" class="" name="brand" v-model="brand">
+            <select id="brand" class="" name="brand" v-model="brand" @blur="checkBrand">
               <option disabled value="">Please select one</option>
               <option :value="brand" v-for="brand in brandList" :key="brand.id">
                 {{ brand.brandName }}
               </option>
             </select>
           </div>
+          <p class="text-red" v-if="!validateBrand">Brand cannot be empty!</p>
         </div>
         <div class="md:w-1/2 flex flex-col">
-          <div v-for="size in sizeList" :key="size.id">
-            <label class="checkbox-inline">
+          <label class="checkbox-inline">Size</label>
+            <p v-if="!sizeIsValid">Size is required at least 1 size</p>
+            <div v-for="size in sizeList" :key="size.id">  
               <input
                 type="checkbox"
                 :id="size.id"
                 name="size"
                 :value="size"
                 v-model="chooseSize"
+                @blur="checkSize"
               />
               {{ size.size }}
-            </label>
+            
           </div>
+          <p class="text-red" v-if="!validateSize">size cannot be empty!</p>
         </div>
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
-        <button v-if="!Edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
+        <button
+          v-if="!edit"
+          type="submit"
+          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+        >
           Add
         </button>
-        <button v-if="Edit" type="submit" class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg">
+        <button
+          v-if="edit"
+          type="submit"
+          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+        >
           Save Edit
         </button>
-        <button v-if="Edit" class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg" @click="cancel;$emit('cancel-form')">
+        <button
+          v-if="edit"
+          class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg"
+          @click="
+            cancel;
+            $emit('cancel-form');
+          "
+        >
           Cancel
         </button>
       </div>
@@ -98,7 +138,7 @@ export default {
     isEdit: Boolean,
     productToEdit: null,
   },
-  emits: ['cancel-form','reload-data'],
+  emits: ["cancel-form", "reload-data"],
   inject: ["brandUrl", "sizeUrl", "productUrl"],
   data() {
     return {
@@ -114,15 +154,88 @@ export default {
       chooseSize: [],
       file: null,
       edit: this.isEdit,
-      productList: []
+      productList: [],
+      validateName: true,
+      validateDate: true,
+      validateDescript: true,
+      validatePrice: true,
+      validateBrand: true,
+      validateSize: true,
+      validateFile: true
     };
   },
   methods: {
     submitform() {
-      if (this.edit) {
-        this.editProduct();
+      if (
+        this.validateName &&
+        this.validateDate &&
+        this.validateDescript &&
+        this.validatePrice &&
+        this.validateBrand &&
+        this.validateSize
+      ) {
+        if (this.edit) {
+          this.editProduct();
+        } else {
+          this.addNewProduct();
+        }
       } else {
-        this.addNewProduct();
+        this.checkName();
+        this.checkDate();
+        this.checkDescript();
+        this.checkPrice();
+        this.checkBrand();
+        this.checkSize();
+        this.checkFIle();
+      }
+    },
+    checkName() {
+      if (this.productName == "") {
+        this.validateName = false;
+      } else {
+        this.validateName = true;
+      }
+    },
+    checkDate() {
+      if (this.date == "") {
+        this.validateDate = false;
+      } else {
+        this.validateDate = true;
+      }
+    },
+    checkDescript() {
+      if (this.descript == "") {
+        this.validateDesript = false;
+      } else {
+        this.validateDesript = true;
+      }
+    },
+    checkPrice() {
+      if (this.price == "") {
+        this.validatePrice = false;
+      } else {
+        this.validatePrice = true;
+      }
+    },
+    checkBrand() {
+      if (this.brand== null) {
+        this.validateBrand = false;
+      } else {
+        this.validateBrand = true;
+      }
+    },
+    checkSize() {
+      if (this.chooseSize == []) {
+        this.validateSize = false;
+      } else {
+        this.validateSize = true;
+      }
+    },
+    checkFIle() {
+      if (this.file == null) {
+        this.validateFile = false;
+      } else {
+        this.validateFile = true;
       }
     },
     async getBrandResult() {
@@ -155,18 +268,19 @@ export default {
     async addNewProduct() {
       let product = JSON.stringify({
         productName: this.productName,
-        date: this.date,
+        manuDate: this.date,
         price: this.price,
         descript: this.descript,
         imagePath: this.imagePath,
         brand: this.brand,
         sizeList: this.chooseSize,
       });
+      console.log(this.date);
       let data = new FormData();
       data.append("product", product);
       data.append("multipartFile", this.file);
       try {
-        await fetch("http://localhost:8080/Product", {
+        await fetch("http://localhost:8080/product", {
           method: "POST",
           body: data,
         });
@@ -178,7 +292,7 @@ export default {
     async editProduct() {
       let product = JSON.stringify({
         productName: this.productName,
-        date: this.date,
+        manuDate: this.date,
         price: this.price,
         descript: this.descript,
         imagePath: this.imagePath,
@@ -188,26 +302,32 @@ export default {
       let data = new FormData();
       let editImg = new FormData();
       data.append("product", product);
-      if(this.file!==null){
-      editImg.append("multipartFile", this.file);
-       try {
-        await fetch(`http://localhost:8080/Product/image/${this.productToEdit.ProductId}`, {
-          method: "PUT",
-          body: editImg,
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      if (this.file !== null) {
+        editImg.append("multipartFile", this.file);
+        try {
+          await fetch(
+            `http://localhost:8080/product/image/${this.productToEdit.productId}`,
+            {
+              method: "PUT",
+              body: editImg,
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
       }
       try {
-        await fetch(`http://localhost:8080/Product/${this.productToEdit.ProductId}`, {
-          method: "PUT",
-          body: data,
-        });
+        await fetch(
+          `http://localhost:8080/product/${this.productToEdit.productId}`,
+          {
+            method: "PUT",
+            body: data,
+          }
+        );
       } catch (error) {
         console.log(error);
       }
-      this.$emit("reload-data")
+      this.$emit("reload-data");
       this.cancel();
     },
     onFileChange(event) {
@@ -223,7 +343,7 @@ export default {
       this.price = 0;
       var image = document.getElementById("output");
       image.src = "";
-      this.file= null
+      this.file = null;
       this.brand = null;
       this.chooseSize = [];
     },
@@ -234,15 +354,16 @@ export default {
     this.productList = await this.getProductList();
     if (this.edit) {
       this.productName = this.productToEdit.productName;
-      this.date = this.productToEdit.date;
+      this.date = new Date(this.productToEdit.manuDate)
+        .toISOString()
+        .slice(0, 10);
       this.descript = this.productToEdit.descript;
       this.price = this.productToEdit.price;
       var image = document.getElementById("output");
       image.src = `http://localhost:8080/product/image/${this.productToEdit.productName}`;
       this.image_Path = this.productToEdit.imagePath;
-      this.Brand = this.productToEdit.brand;
-      this.choosesize = this.productToEdit.sizeList;
-
+      this.brand = this.productToEdit.brand;
+      this.chooseSize = this.productToEdit.sizeList;
     }
   },
 };
@@ -270,6 +391,10 @@ option {
 }
 h3 {
   font-size: large;
+  font-weight: 600;
+}
+p {
+  color: red;
   font-weight: 600;
 }
 </style>
