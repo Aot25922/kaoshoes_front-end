@@ -2,6 +2,7 @@
   <div id="form" class="md:p-5">
     <form
       @submit.prevent="submitform()"
+
       class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2"
     >
       <div class="md:w-full flex">
@@ -15,8 +16,10 @@
             id="productName"
             name="productName"
             v-model="productName"
+            @blur="checkName"
           />
           <p class="text-red" v-if="!validateName">product name cannot be empty!</p>
+
         </div>
         <div class="md:w-1/2 flex flex-col">
           <label for="date">Manufacturer Date</label>
@@ -27,6 +30,7 @@
             id="date"
             name="date"
             v-model="date"
+            @blur="checkDate"
           />
           <p class="text-red" v-if="!validateDate">product manufacturer date cannot be empty!</p>
         </div>
@@ -39,6 +43,7 @@
           name="descript"
           placeholder="Please insert Description..."
           v-model="descript"
+          @blur="checkDescript"
         ></textarea>
         <p class="text-red" v-if="!validateDescript">product description cannot be empty!</p>
       </div>
@@ -50,10 +55,11 @@
           type="number"
           name="price"
           v-model="price"
+          @blur="checkPrice"
         />
         <p class="text-red" v-if="!validatePrice">product price cannot be empty!</p>
       </div>
-      <div class="md:w-1/2">
+      <div class="md:w-1/2 md:pt-10">
         <img id="output" width="200" />
         <input
           type="file"
@@ -67,8 +73,9 @@
       <div class="md:w-1/2">
         <div class="md:w-1/2 flex flex-col">
           <label for="brand">Brand</label>
+          <p v-if="!brandIsValid">Brand is required</p>
           <div class="md:p-3 md:text-lg">
-            <select id="brand" class="" name="brand" v-model="brand">
+            <select id="brand" class="" name="brand" v-model="brand" @blur="checkBrand">
               <option disabled value="">Please select one</option>
               <option :value="brand" v-for="brand in brandList" :key="brand.id">
                 {{ brand.brandName }}
@@ -78,17 +85,19 @@
           <p class="text-red" v-if="!validateBrand">Brand cannot be empty!</p>
         </div>
         <div class="md:w-1/2 flex flex-col">
-          <div v-for="size in sizeList" :key="size.id">
-            <label class="checkbox-inline">
+          <label class="checkbox-inline">Size</label>
+            <p v-if="!sizeIsValid">Size is required at least 1 size</p>
+            <div v-for="size in sizeList" :key="size.id">  
               <input
                 type="checkbox"
                 :id="size.id"
                 name="size"
                 :value="size"
                 v-model="chooseSize"
+                @blur="checkSize"
               />
               {{ size.size }}
-            </label>
+            
           </div>
           <p class="text-red" v-if="!validateSize">size cannot be empty!</p>
         </div>
@@ -382,6 +391,10 @@ option {
 }
 h3 {
   font-size: large;
+  font-weight: 600;
+}
+p {
+  color: red;
   font-weight: 600;
 }
 </style>
