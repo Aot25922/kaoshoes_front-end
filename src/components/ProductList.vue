@@ -5,7 +5,7 @@
         <div class="relative">
           <img :src="`${productUrl}/image/${product.productName}`"  class="md:rounded" @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
 
-          <span class="md:absolute md:bottom-0 md:right-0 bg-cadet-dark text-white md:p-2 md:rounded">
+          <span class="md:absolute bottom-0 right-0 bg-cadet-dark text-white md:p-2 rounded">
             <div class="inline-flex px-1" >
               {{ new Date(product.manuDate).toISOString().slice(0, 10) }}
             </div>
