@@ -326,7 +326,7 @@ export default {
       data.append("product", product);
       data.append("multipartFile", this.file);
       try {
-        await fetch("http://localhost:8080/product", {
+        await fetch(this.productUrl, {
           method: "POST",
           body: data,
         });
@@ -352,7 +352,7 @@ export default {
         editImg.append("multipartFile", this.file);
         try {
           await fetch(
-            `http://localhost:8080/product/image/${this.productToEdit.productId}`,
+            `${this.productUrl}/image/${this.productToEdit.productId}`,
             {
               method: "PUT",
               body: editImg,
@@ -364,7 +364,7 @@ export default {
       }
       try {
         await fetch(
-          `http://localhost:8080/product/${this.productToEdit.productId}`,
+          `${this.productUrl}/${this.productToEdit.productId}`,
           {
             method: "PUT",
             body: data,
@@ -406,7 +406,7 @@ export default {
       this.descript = this.productToEdit.descript;
       this.price = this.productToEdit.price;
       var image = document.getElementById("output");
-      image.src = `http://localhost:8080/product/image/${this.productToEdit.productName}`;
+      image.src = `${this.productUrl}/image/${this.productToEdit.productName}`;
       this.image_Path = this.productToEdit.imagePath;
       this.brand = this.productToEdit.brand;
       this.chooseSize = this.productToEdit.sizeList;

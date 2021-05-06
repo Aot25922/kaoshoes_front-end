@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="md:p-5">
+  <div id="app" class="p-5">
     <div class="navBar">
       <router-link to="/" class="navButton md:flex-shrink-0 md:rounded-l-md" >Home</router-link>
       <router-link to="/Property" class="navButton md:flex-shrink-0 " >Edit</router-link>
