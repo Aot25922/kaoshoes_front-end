@@ -1,7 +1,7 @@
 <template>
-  <div class="grid grid-cols-4 filter drop-shadow-lg md:pt-5">
-    <div class="md:px-2 md:pb-4" v-for="product in productFilterList" :key="product.id">
-      <div class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative" :class="{'cursor-pointer':showDetail}" @click="productInfo(product)">
+  <div class="grid grid-cols-4 filter drop-shadow-lg pt-5">
+    <div class="px-2 pb-4" v-for="product in productFilterList" :key="product.id">
+      <div class="bg-white col-span-1 p-3 sm:text-lg font-medium h-full rounded-md drop-shadow-xl relative" :class="{'cursor-pointer':showDetail}" @click="productInfo(product)">
         <div class="relative">
           <img :src="`http://localhost:8080/product/image/${product.productName}`"  class="md:rounded" @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
 
@@ -10,17 +10,17 @@
               {{ new Date(product.manuDate).toISOString().slice(0, 10) }}
             </div>
           </span>
-          <button class="md:absolute md:-top-2 md:-right-2 hover:opacity-50" @click="$emit('edit-data', product)" v-if="isEdit">
+          <button class="absolute -top-2 -right-2 hover:opacity-50" @click="$emit('edit-data', product)" v-if="isEdit">
             <svg width="50" height="49" viewBox="0 0 50 49" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M34.9479 7.84135L42.7778 16.3527C43.1076 16.7112 43.1076 17.2963 42.7778 17.6548L23.8194 38.2632L15.7639 39.2351C14.6875 39.3672 13.776 38.3764 13.8976 37.2063L14.7917 28.4497L33.75 7.84135C34.0799 7.48278 34.6181 7.48278 34.9479 7.84135ZM49.0104 5.6805L44.7743 1.07571C43.4549 -0.35857 41.3108 -0.35857 39.9826 1.07571L36.9097 4.41607C36.5799 4.77464 36.5799 5.35967 36.9097 5.71824L44.7396 14.2296C45.0694 14.5881 45.6076 14.5881 45.9375 14.2296L49.0104 10.8892C50.3299 9.44548 50.3299 7.11478 49.0104 5.6805ZM33.3333 32.6581V42.264H5.55556V12.0687H25.5035C25.7812 12.0687 26.0417 11.946 26.2413 11.7384L29.7135 7.96402C30.3733 7.24688 29.9045 6.02963 28.9757 6.02963H4.16667C1.86632 6.02963 0 8.05838 0 10.5589V43.7738C0 46.2744 1.86632 48.3031 4.16667 48.3031H34.7222C37.0226 48.3031 38.8889 46.2744 38.8889 43.7738V28.8837C38.8889 27.8741 37.7691 27.374 37.1094 28.0817L33.6371 31.8561C33.4462 32.0731 33.3333 32.3562 33.3333 32.6581Z" fill="#6CCFF6"/>
             </svg>
           </button>
         </div>
         <div class="flex flex-wrap md:pt-1">
-          <p class="sm:text-left sm:w-2/3">{{ product.productName }}</p>
-          <p class="sm:text-right sm:w-1/3">{{ product.price }}฿</p>
+          <p class="text-left lg:w-2/3">{{ product.productName }}</p>
+          <p class="text-right lg:w-1/3">{{ product.price }}฿</p>
         </div>
-        <p class="text-gray-500 sm:text-sm sm:break-all des-text shortDes">
+        <p class="text-gray-500 text-sm break-all des-text shortDes">
           &emsp;&emsp;{{ product.descript }}
         </p>
         <div class='flex justify-end mt-2 hover:opacity-50'>

@@ -1,6 +1,6 @@
 <template>
 
-  <div id="edit" class="">
+  <div id="edit">
     <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit"  />
     <edit-form :isEdit="true" v-if="toEdit" :productToEdit="productToedit" @cancel-form="toEdit=false" @reload-data="reload"  />
   </div>

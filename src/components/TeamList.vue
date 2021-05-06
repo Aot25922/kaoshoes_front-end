@@ -1,12 +1,12 @@
 <template>
-  <div class="flex md:px-5 gap-x-2">
-    <div v-for="team in teamList" :key="team.id" class="bg-white md:p-2 md:rounded-lg  mx-auto">
-        <img v-bind:src="team.img" class="mx-auto md:pb-2 md:max-w-xl">
-        <div class="lg:text-xl text-black font-bold grid grid-cols-2 md:px-2">
-            <div class="col-span-1 text-left">{{ team.id }}</div>
-            <div class="col-span-1 text-right">{{ team.name }}</div>
+  <div class="grid grid-cols-3 md:px-5 space-x-1">
+    <div v-for="team in teamList" :key="team.id" class="bg-white p-2 rounded-lg">
+        <img v-bind:src="team.img" class="mx-auto pb-2">
+        <div class="md:text-xl text-black font-bold grid grid-cols-2 md:px-2">
+            <div class="col-span-1 md:text-left">{{ team.id }}</div>
+            <div class="col-span-2 md:text-right">{{ team.name }}</div>
         </div>
-        <div v-for="role in team.role" :key="role.id" class="font-bold text-gray-500 text-base md:pl-3">{{ role }}</div>
+        <div v-for="role in team.role" :key="role.id" class="font-bold text-gray-500 md:text-base md:pl-3">{{ role }}</div>
     </div>
   </div>
 </template>
