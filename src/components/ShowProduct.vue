@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white grid grid-cols-2 justify-items-stretch p-6">
     <div class="justify-self-center">
-      <img :src="`http://localhost:8080/product/image/${productInfo.productName}`" class="w-auto object-contain" 
+      <img :src="`${productUrl}/image/${productInfo.productName}`" class="w-auto object-contain" 
       @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
     </div>
     <div class="md:px-5 space-y-2">
@@ -28,6 +28,7 @@
 <script>
 export default {
   name: "ShowFood",
+  inject: ["productUrl"],
   props: {
     productInfo: null,
   },

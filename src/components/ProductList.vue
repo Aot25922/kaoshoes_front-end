@@ -3,7 +3,7 @@
     <div class="md:px-2 md:pb-4" v-for="product in productFilterList" :key="product.id">
       <div class="bg-white md:col-span-1 md:p-5 lg:text-lg font-medium md:h-full md:rounded-md drop-shadow-xl relative" :class="{'cursor-pointer':showDetail}" @click="productInfo(product)">
         <div class="relative">
-          <img :src="`http://localhost:8080/product/image/${product.productName}`"  class="md:rounded" @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
+          <img :src="`${productUrl}/image/${product.productName}`"  class="md:rounded" @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
 
           <span class="md:absolute md:bottom-0 md:right-0 bg-cadet-dark text-white md:p-2 md:rounded">
             <div class="inline-flex px-1" >
