@@ -17,7 +17,6 @@
             name="productName"
             v-model="productName"
           />
-          <p v-if="!productNameIsValid" class="md:pt-3">The name field is required</p>
         </div>
         <div class="md:w-1/2 flex flex-col">
           <label for="date">Manufacturer Date</label>
@@ -29,7 +28,6 @@
             name="date"
             v-model="date"
           />
-          <p v-if="!dateIsValid" class="md:pt-3">The date field is required</p>
         </div>
       </div>
       <div class="md:w-full flex flex-col">
@@ -41,7 +39,6 @@
           placeholder="Please insert Description..."
           v-model="descript"
         ></textarea>
-        <p v-if="!descriptIsValid" class="md:pt-3">The descript field is required</p>
       </div>
       <div class="md:w-1/2 flex flex-col">
         <label for="price">Price</label>
@@ -52,7 +49,6 @@
           name="price"
           v-model="price"
         />
-        <p v-if="!priceIsValid" class="md:pt-3">The price field is required</p>
       </div>
       <div class="md:w-1/2 md:pt-10">
         <img id="output" width="200" />
@@ -63,7 +59,6 @@
           id="file"
           @change="onFileChange($event)"
         />
-        <!-- <p v-if="!imagePathIsValid">Must have Image</p> -->
       </div>
       <div class="md:w-1/2">
         <div class="md:w-1/2 flex flex-col">
@@ -141,28 +136,6 @@ export default {
         this.editProduct();
       } else {
         this.addNewProduct();
-      }
-    },
-    checkForm() {
-      const productNameIsValid = !!this.productName;
-      const dateIsValid = this.date;
-      const descriptIsValid = this.descript;
-      const priceIsValid = this.price;
-      const imagePathIsValid = this.imagePath;
-      const brandIsValid = this.brand;
-      const sizeIsValid = this.chooseSize;
-      const formIsValid =
-        productNameIsValid &&
-        dateIsValid &&
-        descriptIsValid &&
-        priceIsValid &&
-        imagePathIsValid &&
-        brandIsValid &&
-        sizeIsValid;
-      if (formIsValid) {
-        console.log("Form submit");
-      } else {
-        console.log("Invalid form");
       }
     },
     async getBrandResult() {
