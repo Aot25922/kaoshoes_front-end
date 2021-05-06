@@ -9,7 +9,7 @@
 }
 
 .navButton {
-    @apply lg:w-1/5 hover:bg-white hover:text-black md:text-center md:p-4 md:rounded 
+    @apply lg:w-1/5 hover:bg-white hover:text-cadet-dark md:text-center md:p-4  focus:bg-white focus:text-cadet-dark
 }
 
 .productBox {
@@ -21,5 +21,5 @@
 }
 
 .navCate{
-    @apply bg-white md:text-2xl font-bold text-black w-full md:text-center md:p-2 md:rounded-md md:mx-auto cursor-pointer
+    @apply bg-white md:text-2xl font-bold text-cadet-dark w-full md:text-center md:p-2 md:rounded-md md:mx-auto cursor-pointer
 }

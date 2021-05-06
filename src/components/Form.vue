@@ -2,7 +2,6 @@
   <div id="form" class="md:p-5">
     <form
       @submit.prevent="submitform()"
-
       class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2"
     >
       <div class="md:w-full flex">
@@ -18,8 +17,9 @@
             v-model="productName"
             @blur="checkName"
           />
-          <p class="text-red" v-if="!validateName">product name cannot be empty!</p>
-
+          <p class="text-red" v-if="!validateName">
+            product name cannot be empty!
+          </p>
         </div>
         <div class="md:w-1/2 flex flex-col">
           <label for="date">Manufacturer Date</label>
@@ -32,7 +32,9 @@
             v-model="date"
             @blur="checkDate"
           />
-          <p class="text-red" v-if="!validateDate">product manufacturer date cannot be empty!</p>
+          <p class="text-red" v-if="!validateDate">
+            product manufacturer date cannot be empty!
+          </p>
         </div>
       </div>
       <div class="md:w-full flex flex-col">
@@ -45,7 +47,9 @@
           v-model="descript"
           @blur="checkDescript"
         ></textarea>
-        <p class="text-red" v-if="!validateDescript">product description cannot be empty!</p>
+        <p class="text-red" v-if="!validateDescript">
+          product description cannot be empty!
+        </p>
       </div>
       <div class="md:w-1/2 flex flex-col">
         <label for="price">Price</label>
@@ -57,7 +61,9 @@
           v-model="price"
           @blur="checkPrice"
         />
-        <p class="text-red" v-if="!validatePrice">product price cannot be empty!</p>
+        <p class="text-red" v-if="!validatePrice">
+          product price cannot be empty!
+        </p>
       </div>
       <div class="md:w-1/2 md:pt-10">
         <img id="output" width="200" />
@@ -70,12 +76,17 @@
         />
         <p class="text-red" v-if="!validateFile">File cannot be empty!</p>
       </div>
-      <div class="md:w-1/2">
+      <div class="md:w-full">
         <div class="md:w-1/2 flex flex-col">
           <label for="brand">Brand</label>
-          <p v-if="!brandIsValid">Brand is required</p>
           <div class="md:p-3 md:text-lg">
-            <select id="brand" class="" name="brand" v-model="brand" @blur="checkBrand">
+            <select
+              id="brand"
+              class=""
+              name="brand"
+              v-model="brand"
+              @blur="checkBrand"
+            >
               <option disabled value="">Please select one</option>
               <option :value="brand" v-for="brand in brandList" :key="brand.id">
                 {{ brand.brandName }}
@@ -84,23 +95,39 @@
           </div>
           <p class="text-red" v-if="!validateBrand">Brand cannot be empty!</p>
         </div>
-        <div class="md:w-1/2 flex flex-col">
-          <label class="checkbox-inline">Size</label>
-            <p v-if="!sizeIsValid">Size is required at least 1 size</p>
-            <div v-for="size in sizeList" :key="size.id">  
+        <div class="flex flex-wrap">
+          <label class="checkbox-inline w-full">Size</label>
+          <div
+            class="md:text-xl md:p-3 w-1/4  my-5 "
+            v-for="size in sizeList"
+            :key="size.id"
+          >
+            <div class="w-full">
               <input
                 type="checkbox"
-                :id="size.id"
+                :id="size.sizeId"
                 name="size"
                 :value="size"
                 v-model="chooseSize"
                 @blur="checkSize"
+                class="hidden"
               />
-              {{ size.size }}
-            
+              <label
+                :for="size.sizeId"
+                class=" bg-white cursor-pointer rounded-sm md:p-5 text-center border-2 border-gray-400 w-36"
+                @click="focus($event)"
+                @mouseover="hover($event)"
+                @mouseleave="hover($event)"
+                >{{ size.size }}</label
+              >
+            </div>
           </div>
-          <p class="text-red" v-if="!validateSize">size cannot be empty!</p>
+          <p class="text-red" v-if="!validateSize">
+            size is required at least 1 size
+          </p>
         </div>
+
+
       </div>
       <div class="flex justify-end md:w-full md:space-x-5">
         <button
@@ -161,11 +188,36 @@ export default {
       validatePrice: true,
       validateBrand: true,
       validateSize: true,
-      validateFile: true
+      validateFile: true,
     };
   },
   methods: {
+    hover(e) {
+      if (e.target.style.backgroundColor == "yellow") {
+        e.target.style.backgroundColor = "white";
+        e.target.style.borderColor = "white";
+      } else {
+        e.target.style.backgroundColor = "yellow";
+        e.target.style.borderColor = "black";
+      }
+    },
+    focus(e) {
+      if (e.target.style.backgroundColor == "yellow") {
+        e.target.style.backgroundColor = "white";
+        e.target.style.borderColor = "white";
+      } else {
+        e.target.style.backgroundColor = "yellow";
+        e.target.style.borderColor = "black";
+      }
+    },
     submitform() {
+      this.checkName();
+      this.checkDate();
+      this.checkDescript();
+      this.checkPrice();
+      this.checkBrand();
+      this.checkSize();
+      this.checkFIle();
       if (
         this.validateName &&
         this.validateDate &&
@@ -180,13 +232,7 @@ export default {
           this.addNewProduct();
         }
       } else {
-        this.checkName();
-        this.checkDate();
-        this.checkDescript();
-        this.checkPrice();
-        this.checkBrand();
-        this.checkSize();
-        this.checkFIle();
+        return;
       }
     },
     checkName() {
@@ -205,9 +251,9 @@ export default {
     },
     checkDescript() {
       if (this.descript == "") {
-        this.validateDesript = false;
+        this.validateDescript = false;
       } else {
-        this.validateDesript = true;
+        this.validateDescript = true;
       }
     },
     checkPrice() {
@@ -218,14 +264,14 @@ export default {
       }
     },
     checkBrand() {
-      if (this.brand== null) {
+      if (this.brand == null) {
         this.validateBrand = false;
       } else {
         this.validateBrand = true;
       }
     },
     checkSize() {
-      if (this.chooseSize == []) {
+      if (this.chooseSize.length == 0) {
         this.validateSize = false;
       } else {
         this.validateSize = true;

@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="md:p-5">
     <div class="navBar">
-      <router-link to="/" class="navButton md:flex-shrink-0 " >Home</router-link>
+      <router-link to="/" class="navButton md:flex-shrink-0 md:rounded-l-md" >Home</router-link>
       <router-link to="/Property" class="navButton md:flex-shrink-0 " >Edit</router-link>
-      <router-link to="/Team" class="navButton md:flex-shrink-0" >About Us</router-link>
+      <router-link to="/Team" class="navButton md:flex-shrink-0 md:rounded-r-md" >About Us</router-link>
     </div>
     <router-view />
   </div>
@@ -11,6 +11,14 @@
 <script>
 export default {
   name: "App",
+  provide(){
+    return{
+      productUrl : `${this.dbUrl}/product`,
+      brandUrl : `${this.dbUrl}/brand`,
+      sizeUrl : `${this.dbUrl}/size`
+    }
+    
+  },
   watch:{
     $route (to){
         const nav = document.getElementsByClassName("navButton")
@@ -26,13 +34,6 @@ export default {
         }
     }
 } ,
-  provide(){
-    return{
-      productUrl : `${this.dbUrl}/product`,
-      brandUrl : `${this.dbUrl}/brand`,
-      sizeUrl : `${this.dbUrl}/size`
-    }
-  },
   data(){
     return {
       dbUrl : "http://kaoshoes.ddns.net:8080"
