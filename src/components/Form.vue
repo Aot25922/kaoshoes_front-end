@@ -2,15 +2,14 @@
   <div id="form" class="md:p-5">
     <form
       @submit.prevent="submitform()"
-      class="bg-helio-light md:p-7 flex flex-wrap md:rounded-md md:space-y-2"
-    >
-      <div class="md:w-full flex">
-        <div class="md:w-1/2 flex flex-col">
-          <label for="name">Product Name</label>
+      class="bg-helio-light p-7 flex flex-wrap rounded-md space-y-2">
+      <div class="w-full flex">
+        <div class="w-1/2 flex flex-col">
+          <label for="name" class="font-bold md:text-3xl py-2">Product Name</label>
           <input
             placeholder="Please insert Product name..."
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-            class="md:w-11/12"
+            class="w-11/12"
             type="text"
             id="productName"
             name="productName"
@@ -18,11 +17,11 @@
             @blur="checkName"
           />
           <p class="text-red" v-if="!validateName">
-            product name cannot be empty!
+            Product name cannot be empty!
           </p>
         </div>
-        <div class="md:w-1/2 flex flex-col">
-          <label for="date">Manufacturer Date</label>
+        <div class="w-1/2 flex flex-col">
+          <label for="date" class="font-bold md:text-3xl py-2">Manufacturer Date</label>
           <input
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
             class="lg:w-1/3"
@@ -37,8 +36,8 @@
           </p>
         </div>
       </div>
-      <div class="md:w-full flex flex-col">
-        <label for="Des">Product Description</label>
+      <div class="w-full flex flex-col">
+        <label for="Des" class="font-bold md:text-3xl py-2">Product Description</label>
         <textarea
           type="text"
           id="descript"
@@ -51,21 +50,21 @@
           product description cannot be empty!
         </p>
       </div>
-      <div class="md:w-1/2 flex flex-col">
-        <label for="price">Price</label>
+      <div class="w-1/2 flex flex-col">
+        <label for="price" class="font-bold md:text-3xl py-2">Price</label>
         <input
           style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-          class="md:w-11/12"
+          class="w-11/12"
           type="number"
           name="price"
           v-model="price"
           @blur="checkPrice"
         />
         <p class="text-red" v-if="!validatePrice">
-          product price cannot be empty!
+          Product price cannot be empty!
         </p>
       </div>
-      <div class="md:w-1/2 md:pt-10">
+      <div class="w-1/2 pt-10">
         <img id="output" width="200" />
         <input
           type="file"
@@ -76,10 +75,10 @@
         />
         <p class="text-red" v-if="!validateFile">File cannot be empty!</p>
       </div>
-      <div class="md:w-full">
-        <div class="md:w-1/2 flex flex-col">
-          <label for="brand">Brand</label>
-          <div class="md:p-3 md:text-lg">
+      <div class="w-full">
+        <div class="w-1/2 flex flex-col">
+          <label for="brand" class="font-bold md:text-3xl py-2">Brand</label>
+          <div class="p-3 md:text-lg">
             <select
               id="brand"
               class=""
@@ -95,14 +94,14 @@
           </div>
           <p class="text-red" v-if="!validateBrand">Brand cannot be empty!</p>
         </div>
-        <div class="flex flex-wrap">
-          <label class="checkbox-inline w-full">Size</label>
+        <div class="grid grid-cols-4">
+          <label class="checkbox-inline w-full col-span-4 font-bold md:text-3xl py-2">Size</label>
           <div
-            class="md:text-xl md:p-3 w-1/4  my-5 "
+            class="md:text-xl p-3 col-span-1 my-5"
             v-for="size in sizeList"
             :key="size.id"
           >
-            <div class="w-full">
+            <div>
               <input
                 type="checkbox"
                 :id="size.sizeId"
@@ -114,7 +113,7 @@
               />
               <label
                 :for="size.sizeId"
-                class=" bg-white cursor-pointer rounded-sm md:p-5 text-center border-2 border-gray-400 w-36"
+                class="inline-block w-2/3 bg-white cursor-pointer rounded-sm p-5 text-center border-2 border-gray-400 lg:text-lg font-medium"
                 @click="focus($event)"
                 @mouseover="hover($event)"
                 @mouseleave="hover($event)"
@@ -123,7 +122,7 @@
             </div>
           </div>
           <p class="text-red" v-if="!validateSize">
-            size is required at least 1 size
+            Size is required at least 1 size
           </p>
         </div>
 
@@ -193,20 +192,20 @@ export default {
   },
   methods: {
     hover(e) {
-      if (e.target.style.backgroundColor == "yellow") {
+      if (e.target.style.backgroundColor == "grey") {
         e.target.style.backgroundColor = "white";
-        e.target.style.borderColor = "white";
+        e.target.style.borderColor = "grey";
       } else {
-        e.target.style.backgroundColor = "yellow";
+        e.target.style.backgroundColor = "grey";
         e.target.style.borderColor = "black";
       }
     },
     focus(e) {
-      if (e.target.style.backgroundColor == "yellow") {
+      if (e.target.style.backgroundColor == "grey") {
         e.target.style.backgroundColor = "white";
-        e.target.style.borderColor = "white";
+        e.target.style.borderColor = "grey";
       } else {
-        e.target.style.backgroundColor = "yellow";
+        e.target.style.backgroundColor = "grey";
         e.target.style.borderColor = "black";
       }
     },
@@ -416,10 +415,6 @@ export default {
 </script>
 
 <style scoped>
-label {
-  font-size: xx-large;
-  font-weight: 600;
-}
 input {
   border: black;
   padding: 1%;

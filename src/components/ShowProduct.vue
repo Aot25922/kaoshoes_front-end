@@ -13,7 +13,7 @@
         <div class="md:text-lg font-normal md:pl-5">Size:</div>
         <div class="flex flex-wrap">
           <div class=" lg:text-xl md:p-3 w-1/3" v-for="size in productInfo.sizeList" :key="size.sizeId">
-            <div class="rounded-sm md:p-5 text-center border-2 border-gray-400 hover:border-cadet-dark">
+            <div class="rounded-sm md:p-5 text-center border-2 border-gray-400 hover:border-cadet-dark font-medium">
               {{size.size}}
             </div>
           </div>
