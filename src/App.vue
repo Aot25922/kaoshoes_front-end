@@ -36,7 +36,7 @@ export default {
 } ,
   data(){
     return {
-      dbUrl : "https://spring:8443"
+      dbUrl : "http://localhost:8080"
       // dbUrl : "https://kaoshoes.ddns.net:8443"
     }
   },

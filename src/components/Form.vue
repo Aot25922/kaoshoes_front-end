@@ -107,7 +107,7 @@
             <div class="w-full">
               <input
                 type="checkbox"
-                :id="size.sizeId"
+                :id="size.size"
                 name="size"
                 :value="size"
                 v-model="chooseSize"
@@ -115,11 +115,10 @@
                 class="hidden"
               />
               <label
-                :for="size.sizeId"
-                class=" bg-white cursor-pointer rounded-sm md:p-5 text-center border-2 border-gray-400 w-36"
+                :for="size.size"
+                class=" inline-block w-2/3 bg-white cursor-pointer rounded-sm p-5 text-center border-2 border-grey-nice lg:text-lg font-medium"
                 @click="focus($event)"
-                @mouseover="hover($event)"
-                @mouseleave="hover($event)"
+                :class="{'bg-yellow-300':checkBox(size.size)}"
                 >{{ size.size }}</label
               >
             </div>
@@ -194,22 +193,20 @@ export default {
     };
   },
   methods: {
-    hover(e) {
-      if (e.target.style.backgroundColor == "yellow") {
-        e.target.style.backgroundColor = "white";
-        e.target.style.borderColor = "white";
-      } else {
-        e.target.style.backgroundColor = "yellow";
-        e.target.style.borderColor = "black";
+    checkBox(id){
+      for(let i =0;i<this.chooseSize.length;i++){
+        if(this.chooseSize[i].size==id){
+          return true;
+        }
       }
     },
     focus(e) {
-      if (e.target.style.backgroundColor == "yellow") {
+      if (e.target.style.backgroundColor == "rgba(252, 211, 77, var(--tw-bg-opacity))") {
         e.target.style.backgroundColor = "white";
-        e.target.style.borderColor = "white";
+        e.target.style.borderColor="#a6a6a6"
       } else {
-        e.target.style.backgroundColor = "yellow";
-        e.target.style.borderColor = "black";
+        e.target.style.backgroundColor = "rgba(252, 211, 77, var(--tw-bg-opacity))";
+        e.target.style.borderColor="black"
       }
     },
     submitform() {
@@ -219,7 +216,6 @@ export default {
       this.checkPrice();
       this.checkBrand();
       this.checkSize();
-      this.checkFIle();
       if (
         this.validateName &&
         this.validateDate &&
@@ -286,13 +282,6 @@ export default {
         this.validateSize = true;
       }
     },
-    checkFIle() {
-      if (this.file == null) {
-        this.validateFile = false;
-      } else {
-        this.validateFile = true;
-      }
-    },
     async getBrandResult() {
       try {
         const res = await fetch(this.brandUrl);
@@ -345,6 +334,7 @@ export default {
       this.cancel();
     },
     async editProduct() {
+      console.log(this.chooseSize)
       let product = JSON.stringify({
         productName: this.productName,
         manuDate: this.date,
