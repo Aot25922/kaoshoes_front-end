@@ -10,7 +10,7 @@
 import editForm from "../components/Form.vue";
 export default {
   name: "Edit",
-  emits: ["edit-mydata"],
+  emits: ["edit-mydata","my-focus"],
   components: {
     editForm,
   },
@@ -31,7 +31,7 @@ export default {
       this.toEdit = false;
       this.$router.go(0);
     },
-  },
+  }
 }
 
 </script>

@@ -11,6 +11,34 @@
 
 export default {
 name : 'Property',
+watch:{
+    $route (to){
+        const nav = document.getElementsByClassName("navEdit")
+        for(let i=0;i<nav.length;i++){
+          if(nav[i].getAttribute("href")==to.path){
+            nav[i].style.backgroundColor="white"
+            nav[i].style.color="#22223B"
+          }
+          else{
+            nav[i].style.backgroundColor="#22223B"
+            nav[i].style.color="white"
+          }
+        }
+    }
+} ,
+mounted(){
+    const nav = document.getElementsByClassName("navEdit")
+    for(let i=0;i<nav.length;i++){
+          if(nav[i].getAttribute("href")==this.$route.path){
+            nav[i].style.backgroundColor="white"
+            nav[i].style.color="#22223B"
+          }
+          else{
+            nav[i].style.backgroundColor="#22223B"
+            nav[i].style.color="white"
+          }
+        }
+}
 }
 </script>
 
