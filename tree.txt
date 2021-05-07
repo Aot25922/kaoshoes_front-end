@@ -1,0 +1,50 @@
+Folder PATH listing for volume Windows-SSD
+Volume serial number is 90B5-7679
+C:.
+�   .browserslistrc
+�   .dockerignore
+�   .eslintrc.js
+�   .gitignore
+�   babel.config.js
+�   docker-compose.yaml
+�   Dockerfile
+�   package-lock.json
+�   package.json
+�   postcss.config.js
+�   README.md
+�   tailwind.config.js
+�   tree.txt
+�   vue.config.js
+�   
+?���public
+�       favicon.ico
+�       index.html
+�       
+����src
+    �   App.vue
+    �   main.js
+    �   
+    ?���assets
+    �       aot.jpg
+    �       bom.jpg
+    �       demo.jpg
+    �       tailwind.css
+    �       
+    ?���components
+    �       Error.vue
+    �       Form.vue
+    �       ProductBrand.vue
+    �       ProductList.vue
+    �       ShowProduct.vue
+    �       TeamList.vue
+    �       
+    ?���router
+    �       index.js
+    �       
+    ����views
+            Add.vue
+            Edit.vue
+            Home.vue
+            Property.vue
+            Team.vue
+            

@@ -13,12 +13,12 @@
         <div class="md:text-lg font-normal md:pl-5">Size:</div>
         <div class="flex flex-wrap">
           <div class=" lg:text-xl md:p-3 w-1/3" v-for="size in productInfo.sizeList" :key="size.sizeId">
-            <div class="rounded-sm md:p-5 text-center border-2 border-gray-400 hover:border-cadet-dark">
+            <div class="rounded-sm md:p-5 text-center border-2 border-grey-nice ">
               {{size.size}}
             </div>
           </div>
         </div>
-        <div class="md:text-xl md:py-5 font-normal">&emsp;&emsp;{{productInfo.descript}}</div>
+        <div class="md:text-xl md:py-5 font-normal "><p class="leading-relaxed break-words">&emsp;&emsp;{{productInfo.descript}}</p></div>
         <div class="text-right text-gray-500 md:py-5">Manufacturer: {{new Date(productInfo.manuDate).toISOString().slice(0, 10)}}</div>    
       <button class="md:py-5 md:px-10 bg-red-600 text-black font-bold text-2xl drop-shadow-lg rounded hover:bg-red-salsa float-right" @click="goBack">Back</button>
     </div>
