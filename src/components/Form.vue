@@ -61,6 +61,7 @@
           @blur="checkPrice"
           min="1"
           max="1000000"
+          step="0.01"
         />
         <p class="text-red" v-if="!validatePrice">
           Product price cannot be empty!
@@ -355,6 +356,7 @@ export default {
       }
       if (this.file !== null) {
         editImg.append("multipartFile", this.file);
+        console.log(product)
         try {
           await fetch(
             `${this.productUrl}/image/${this.productToEdit.productId}`,
