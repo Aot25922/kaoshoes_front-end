@@ -11,7 +11,7 @@
 import editForm from "../components/Form.vue";
 export default {
   name: "Edit",
-  emits: ["edit-mydata","my-focus"],
+  emits: ["edit-mydata"],
   components: {
     editForm,
   },
