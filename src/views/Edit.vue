@@ -37,7 +37,7 @@ export default {
     },
     reload() {
       this.toEdit = false;
-      this.$router.go(0);
+      // this.$router.go(0);
     },
   }
 }
