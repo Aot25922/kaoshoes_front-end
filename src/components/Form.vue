@@ -129,24 +129,24 @@
 
 
       </div>
-      <div class="flex justify-end md:w-full md:space-x-5">
+      <div class="flex justify-end w-full space-x-5">
         <button
           v-if="!edit"
           type="submit"
-          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+          class="bg-green-500 md:text-3xl font-bold py-5 px-8 hover:bg-green-light md:rounded-lg"
         >
           Add
         </button>
         <button
           v-if="edit"
           type="submit"
-          class="bg-green-500 md:text-3xl font-bold md:py-5 md:px-8 hover:bg-green-light md:rounded-lg"
+          class="bg-green-500 md:text-3xl font-bold py-5 px-8 hover:bg-green-light md:rounded-lg"
         >
           Save Edit
         </button>
         <button
           v-if="edit"
-          class="bg-red md:text-3xl font-bold md:py-5 md:px-8 hover:bg-red-salsa md:rounded-lg"
+          class="bg-red md:text-3xl font-bold py-5 px-8 hover:bg-red-salsa md:rounded-lg"
           @click="
             cancel;
             $emit('cancel-form');

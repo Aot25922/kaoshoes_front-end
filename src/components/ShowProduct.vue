@@ -4,7 +4,7 @@
       <img :src="`${productUrl}/image/${productInfo.productName}`" class="w-auto object-contain" 
       @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
     </div>
-    <div class="md:px-5 space-y-2">
+    <div class="px-5 space-y-2">
       <div class="md:text-lg">{{productInfo.brand.brandName}}</div>
       <div class="flex flex-wrap">
         <div class="md:text-4xl font-medium w-5/6">{{ productInfo.productName }}</div>
@@ -12,15 +12,15 @@
       </div>  
         <div class="md:text-lg font-normal md:pl-5">Size:</div>
         <div class="flex flex-wrap">
-          <div class=" lg:text-xl md:p-3 w-1/3" v-for="size in productInfo.sizeList" :key="size.sizeId">
+          <div class=" lg:text-xl p-3 w-1/3" v-for="size in productInfo.sizeList" :key="size.sizeId">
             <div class="rounded-sm md:p-5 text-center border-2 border-grey-nice ">
               {{size.size}}
             </div>
           </div>
         </div>
-        <div class="md:text-xl md:py-5 font-normal "><p class="leading-relaxed break-words">&emsp;&emsp;{{productInfo.descript}}</p></div>
+        <div class="md:text-xl py-5 font-normal "><p class="leading-relaxed break-words">&emsp;&emsp;{{productInfo.descript}}</p></div>
         <div class="text-right text-gray-500 md:py-5">Manufacturer: {{new Date(productInfo.manuDate).toISOString().slice(0, 10)}}</div>    
-      <button class="md:py-5 md:px-10 bg-red-600 text-black font-bold text-2xl drop-shadow-lg rounded hover:bg-red-salsa float-right" @click="goBack">Back</button>
+      <button class="py-5 px-10 bg-red-600 text-black font-bold md:text-2xl drop-shadow-lg rounded hover:bg-red-salsa float-right" @click="goBack">Back</button>
     </div>
   </div>
 
