@@ -17,7 +17,7 @@
             @blur="checkName"
           />
           <p class="text-red" v-if="!validateName">
-            Product name cannot be empty!
+            Product name cannot be empty! or This name is already exist 
           </p>
         </div>
         <div class="w-1/2 flex flex-col">
@@ -75,7 +75,7 @@
           id="file"
           @change="onFileChange($event)"
         />
-        <p class="text-red" v-if="!validateFile">File cannot be empty!</p>
+        <!-- <p class="text-red" v-if="!validateFile">File cannot be empty!</p> -->
       </div>
       <div class="w-full">
         <div class="w-1/2 flex flex-col">
@@ -114,10 +114,9 @@
                 class="hidden"
               />
               <label
-                :for="size.sizeId"
-                class="inline-block w-2/3 bg-white cursor-pointer rounded-sm p-5 text-center border-2 border-gray-400 lg:text-lg font-medium"
+                :for="size.size"
+                class="mycheck inline-block w-2/3  cursor-pointer rounded-sm p-5 text-center border-2 border-gray-400 lg:text-lg font-medium"
                 @click="focus($event)"
-                :class="{'bg-yellow-300':checkBox(size.size)}"
                 >{{ size.size }}</label
               >
             </div>
@@ -188,17 +187,9 @@ export default {
       validatePrice: true,
       validateBrand: true,
       validateSize: true,
-      validateFile: true,
     };
   },
   methods: {
-    checkBox(id){
-      for(let i =0;i<this.chooseSize.length;i++){
-        if(this.chooseSize[i].size==id){
-          return true;
-        }
-      }
-    },
     focus(e) {
       if (e.target.style.backgroundColor == "rgba(252, 211, 77, var(--tw-bg-opacity))") {
         e.target.style.backgroundColor = "white";
@@ -237,10 +228,14 @@ export default {
         this.validateName = false;
       }
       else {
-        for(let i in this.productList){
-          if(this.productName==i.productName){
+        for(let i =0 ; i<this.productList.length;i++){
+           console.log(this.productName)
+           console.log(this.productList[i].productName)
+          if(this.productName==this.productList[i].productName){
+            if(!this.edit){
             this.validateName = false;
             return;
+            }
           }
         }
         this.validateName = true;
@@ -275,6 +270,7 @@ export default {
       }
     },
     checkSize() {
+      console.log(this.chooseSize)
       if (this.chooseSize.length == 0) {
         this.validateSize = false;
       } else {
@@ -346,6 +342,17 @@ export default {
       let data = new FormData();
       let editImg = new FormData();
       data.append("product", product);
+      try {
+        await fetch(
+          `${this.productUrl}/${this.productToEdit.productId}`,
+          {
+            method: "PUT",
+            body: data,
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
       if (this.file !== null) {
         editImg.append("multipartFile", this.file);
         try {
@@ -360,17 +367,7 @@ export default {
           console.log(error);
         }
       }
-      try {
-        await fetch(
-          `${this.productUrl}/${this.productToEdit.productId}`,
-          {
-            method: "PUT",
-            body: data,
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
+      
       this.$emit("reload-data");
       this.cancel();
     },
@@ -390,6 +387,11 @@ export default {
       this.file = null;
       this.brand = null;
       this.chooseSize = [];
+      var sizeCheckbox=document.getElementsByClassName("mycheck")
+      for(let i=0;i<sizeCheckbox.length;i++){
+      sizeCheckbox[i].style.backgroundColor = "white";
+      sizeCheckbox[i].style.borderColor="#a6a6a6"
+      }
     },
   },
   async created() {
@@ -408,6 +410,15 @@ export default {
       this.image_Path = this.productToEdit.imagePath;
       this.brand = this.productToEdit.brand;
       this.chooseSize = this.productToEdit.sizeList;
+      var sizeCheckbox=document.getElementsByClassName("mycheck")
+      for(let i =0;i<sizeCheckbox.length;i++){
+        for(let t=0;t<this.chooseSize.length;t++){
+          if(sizeCheckbox[i].innerHTML==this.chooseSize[t].size){
+            sizeCheckbox[i].style.backgroundColor = "rgba(252, 211, 77, var(--tw-bg-opacity))";
+            sizeCheckbox[i].style.borderColor="#a6a6a6"
+          }
+        }
+      }
     }
   },
 };
