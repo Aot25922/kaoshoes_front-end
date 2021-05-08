@@ -59,6 +59,8 @@
           name="price"
           v-model="price"
           @blur="checkPrice"
+          min="1"
+          max="1000000"
         />
         <p class="text-red" v-if="!validatePrice">
           Product price cannot be empty!
@@ -104,7 +106,7 @@
             <div>
               <input
                 type="checkbox"
-                :id="size.sizeId"
+                :id="size.size"
                 name="size"
                 :value="size"
                 v-model="chooseSize"
@@ -115,8 +117,7 @@
                 :for="size.sizeId"
                 class="inline-block w-2/3 bg-white cursor-pointer rounded-sm p-5 text-center border-2 border-gray-400 lg:text-lg font-medium"
                 @click="focus($event)"
-                @mouseover="hover($event)"
-                @mouseleave="hover($event)"
+                :class="{'bg-yellow-300':checkBox(size.size)}"
                 >{{ size.size }}</label
               >
             </div>
@@ -191,22 +192,20 @@ export default {
     };
   },
   methods: {
-    hover(e) {
-      if (e.target.style.backgroundColor == "grey") {
-        e.target.style.backgroundColor = "white";
-        e.target.style.borderColor = "grey";
-      } else {
-        e.target.style.backgroundColor = "grey";
-        e.target.style.borderColor = "black";
+    checkBox(id){
+      for(let i =0;i<this.chooseSize.length;i++){
+        if(this.chooseSize[i].size==id){
+          return true;
+        }
       }
     },
     focus(e) {
-      if (e.target.style.backgroundColor == "grey") {
+      if (e.target.style.backgroundColor == "rgba(252, 211, 77, var(--tw-bg-opacity))") {
         e.target.style.backgroundColor = "white";
-        e.target.style.borderColor = "grey";
+        e.target.style.borderColor="#a6a6a6"
       } else {
-        e.target.style.backgroundColor = "grey";
-        e.target.style.borderColor = "black";
+        e.target.style.backgroundColor = "rgba(252, 211, 77, var(--tw-bg-opacity))";
+        e.target.style.borderColor="black"
       }
     },
     submitform() {
@@ -216,7 +215,6 @@ export default {
       this.checkPrice();
       this.checkBrand();
       this.checkSize();
-      this.checkFIle();
       if (
         this.validateName &&
         this.validateDate &&
@@ -237,7 +235,14 @@ export default {
     checkName() {
       if (this.productName == "") {
         this.validateName = false;
-      } else {
+      }
+      else {
+        for(let i in this.productList){
+          if(this.productName==i.productName){
+            this.validateName = false;
+            return;
+          }
+        }
         this.validateName = true;
       }
     },
@@ -274,13 +279,6 @@ export default {
         this.validateSize = false;
       } else {
         this.validateSize = true;
-      }
-    },
-    checkFIle() {
-      if (this.file == null) {
-        this.validateFile = false;
-      } else {
-        this.validateFile = true;
       }
     },
     async getBrandResult() {
@@ -335,6 +333,7 @@ export default {
       this.cancel();
     },
     async editProduct() {
+      console.log(this.chooseSize)
       let product = JSON.stringify({
         productName: this.productName,
         manuDate: this.date,

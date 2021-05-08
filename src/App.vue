@@ -36,7 +36,7 @@ export default {
 } ,
   data(){
     return {
-      dbUrl : "http://kaoshoes.ddns.net:8080"
+      dbUrl : "https://kaoshoes.ddns.net/api"
     }
   },
   methods : {

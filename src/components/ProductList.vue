@@ -1,9 +1,9 @@
 <template>
   <div class="grid grid-cols-4 filter drop-shadow-lg pt-5">
-    <div class="px-2 pb-4" v-for="product in productFilterList" :key="product.id">
+    <div class="px-2 pb-4" v-for="product in productFilterList" :key="product.id"  @error="console.log('test')">
       <div class="bg-white col-span-1 p-3 sm:text-lg font-medium h-full rounded-md drop-shadow-xl relative" :class="{'cursor-pointer':showDetail}" @click="productInfo(product)">
         <div class="relative">
-          <img :src="`${productUrl}/image/${product.productName}`"  class="md:rounded" @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
+          <img :src="`${productUrl}/image/${product.productName}`"  class="md:rounded w-full h-80" @error="$event.target.src='https://cdn4.vectorstock.com/i/1000x1000/87/78/website-error-500-internal-server-error-artwork-vector-23988778.jpg'"/>
 
           <span class="md:absolute bottom-0 right-0 bg-cadet-dark text-white md:p-2 rounded">
             <div class="inline-flex px-1" >
@@ -37,7 +37,7 @@
 <script>
 export default {
   name: "productList",
-  emits: ["edit-data", "delete-data","show-detail"],
+  emits: ["edit-data", "delete-data","show-detail","error-type"],
   inject: ["productUrl"],
   props: {
     isEdit: Boolean,
@@ -65,7 +65,7 @@ export default {
         const data = res.json();
         return data;
       } catch (error) {
-        console.log(`Counld not get! ${error}`);
+        this.$emit("error-type",error)
       }
     },
     async deleteData(product){
