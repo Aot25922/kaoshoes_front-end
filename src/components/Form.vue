@@ -116,7 +116,7 @@
               />
               <label
                 :for="size.size"
-                class="mycheck inline-block w-2/3  cursor-pointer rounded-sm p-5 text-center border-2 border-gray-400 lg:text-lg font-medium"
+                class="mycheck inline-block w-2/3 bg-white cursor-pointer rounded-sm p-5 text-center border-2 border-gray-400 lg:text-lg font-medium"
                 @click="focus($event)"
                 >{{ size.size }}</label
               >
@@ -165,7 +165,7 @@ export default {
     isEdit: Boolean,
     productToEdit: null,
   },
-  emits: ["cancel-form", "reload-data"],
+  emits: ["cancel-form", "reload-data","edit-image"],
   inject: ["brandUrl", "sizeUrl", "productUrl"],
   data() {
     return {
@@ -330,7 +330,7 @@ export default {
       this.cancel();
     },
     async editProduct() {
-      console.log(this.chooseSize)
+      let editOnlyImage;
       let product = JSON.stringify({
         productName: this.productName,
         manuDate: this.date,
@@ -356,7 +356,7 @@ export default {
       }
       if (this.file !== null) {
         editImg.append("multipartFile", this.file);
-        console.log(product)
+        editOnlyImage=true;
         try {
           await fetch(
             `${this.productUrl}/image/${this.productToEdit.productId}`,
@@ -370,7 +370,7 @@ export default {
         }
       }
       
-      this.$emit("reload-data");
+      this.$emit("reload-data",editOnlyImage);
       this.cancel();
     },
     onFileChange(event) {
@@ -417,7 +417,7 @@ export default {
         for(let t=0;t<this.chooseSize.length;t++){
           if(sizeCheckbox[i].innerHTML==this.chooseSize[t].size){
             sizeCheckbox[i].style.backgroundColor = "rgba(252, 211, 77, var(--tw-bg-opacity))";
-            sizeCheckbox[i].style.borderColor="#a6a6a6"
+            sizeCheckbox[i].style.borderColor="black"
           }
         }
       }
