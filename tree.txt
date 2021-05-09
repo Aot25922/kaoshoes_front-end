@@ -25,9 +25,6 @@ C:.
     �   main.js
     �   
     ?���assets
-    �       aot.jpg
-    �       bom.jpg
-    �       demo.jpg
     �       tailwind.css
     �       
     ?���components
