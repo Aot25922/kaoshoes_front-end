@@ -1,7 +1,7 @@
 <template>
 
   <div id="edit">
-    <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit"  @error-type="pageError" v-if="!error"/>
+    <product-list @edit-data='editData'  :isEdit='true' v-show="!toEdit"  @error-type="pageError" v-if="!error" ref="productlist"/>
     <edit-form :isEdit="true" v-if="toEdit&&!error" :productToEdit="productToedit" @cancel-form="toEdit=false" @reload-data="reload"  />
   </div>
   <error-detail v-if="error" :errorType="errorType"/>
@@ -35,9 +35,13 @@ export default {
       this.productToedit = product;
       this.toEdit = true;
     },
-    reload() {
+    reload(editOnlyImage) {
       this.toEdit = false;
+      if(editOnlyImage){
       this.$router.go(0);
+      }else{
+        this.$refs.productlist.reload()
+      }
     },
   }
 }
