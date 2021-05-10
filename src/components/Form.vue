@@ -230,8 +230,6 @@ export default {
       }
       else {
         for(let i =0 ; i<this.productList.length;i++){
-           console.log(this.productName)
-           console.log(this.productList[i].productName)
           if(this.productName==this.productList[i].productName){
             if(!this.edit){
             this.validateName = false;
@@ -271,7 +269,6 @@ export default {
       }
     },
     checkSize() {
-      console.log(this.chooseSize)
       if (this.chooseSize.length == 0) {
         this.validateSize = false;
       } else {
