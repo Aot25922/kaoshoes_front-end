@@ -31,7 +31,6 @@ export default {
   methods: {
     pageError(e){
       this.error=true;
-      console.log(e)
       this.errorType=e
     },
     selectBrand(id){
