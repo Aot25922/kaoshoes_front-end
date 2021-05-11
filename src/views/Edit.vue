@@ -28,7 +28,6 @@ export default {
     methods: {
      pageError(e){
       this.error=true;
-      console.log(e)
       this.errorType=e
     },  
     editData(product) {

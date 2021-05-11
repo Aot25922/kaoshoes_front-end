@@ -272,7 +272,6 @@ export default {
       }
     },
     checkSize() {
-      console.log(this.chooseSize)
       if (this.chooseSize.length == 0) {
         this.validateSize = false;
       } else {
