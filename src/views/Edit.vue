@@ -37,7 +37,7 @@ export default {
     reload(editOnlyImage) {
       this.toEdit = false;
       if(editOnlyImage){
-      //  this.$router.go(0);
+       this.$router.go(0);
       }else{
         this.$refs.productlist.reload()
       }
