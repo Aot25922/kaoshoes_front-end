@@ -76,7 +76,7 @@
           id="file"
           @change="onFileChange($event)"
         />
-        <!-- <p class="text-red" v-if="!validateFile">File cannot be empty!</p> -->
+        <p class="text-red" v-if="!validateFile">File cannot be empty!</p>
       </div>
       <div class="w-full">
         <div class="w-1/2 flex flex-col">
@@ -188,6 +188,7 @@ export default {
       validatePrice: true,
       validateBrand: true,
       validateSize: true,
+      validateFile:true
     };
   },
   methods: {
@@ -207,13 +208,15 @@ export default {
       this.checkPrice();
       this.checkBrand();
       this.checkSize();
+      this.checkFile();
       if (
         this.validateName &&
         this.validateDate &&
         this.validateDescript &&
         this.validatePrice &&
         this.validateBrand &&
-        this.validateSize
+        this.validateSize &&
+        this.validateFile
       ) {
         if (this.edit) {
           this.editProduct();
@@ -273,6 +276,16 @@ export default {
         this.validateSize = false;
       } else {
         this.validateSize = true;
+      }
+    },
+    checkFile() {
+      if ( this.file == null) {
+        if(this.edit){
+          this.validateFile = true;
+        }
+        this.validateFile = false;
+      } else {
+        this.validateFile = true;
       }
     },
     async getBrandResult() {
