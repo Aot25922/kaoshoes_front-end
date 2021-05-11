@@ -325,7 +325,6 @@ export default {
         brand: this.brand,
         sizeList: this.chooseSize,
       });
-      console.log(this.date);
       let data = new FormData();
       data.append("product", product);
       data.append("multipartFile", this.file);
