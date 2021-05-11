@@ -282,6 +282,7 @@ export default {
       if ( this.file == null) {
         if(this.edit){
           this.validateFile = true;
+          return;
         }
         this.validateFile = false;
       } else {
