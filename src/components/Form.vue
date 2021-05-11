@@ -388,6 +388,7 @@ export default {
       image.src = URL.createObjectURL(event.target.files[0]);
       this.file = event.target.files[0];
       this.imagePath = this.file.name;
+      this.checkFile()
     },
     cancel() {
       this.productName = "";
