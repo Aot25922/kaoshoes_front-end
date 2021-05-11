@@ -17,7 +17,7 @@ export default {
       return{
           teamList: [{id:'62130500031', name:'Thanasap Leelapisuth', role:['Frontend','Database']},
           {id:'62130500033', name:'Tanapat Kullakul', role:['Frontend','Backend']},
-          {id:'62130500043', name:'Nithach Vassanapong', role:['Full-Stack Developer']}]
+          {id:'62130500043', name:'Nithach Vassanapong', role:['DevOps & Debug']}]
       }
   }
 };
