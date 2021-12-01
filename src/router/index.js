@@ -29,10 +29,6 @@ const routes = [
     path: '/Team',
     name: 'Team',
     component: Team,
-  },
-  {
-    path: '*',
-    redirect: '/'
   }
 ]
 
