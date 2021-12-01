@@ -36,8 +36,7 @@ export default {
 } ,
   data(){
     return {
-      //  dbUrl : "http://localhost:8080"
-      dbUrl : "https://kaoshoes.azurewebsites.net"
+      dbUrl : "http://bom2321.thddns.net:7996"
     }
   },
   methods : {
