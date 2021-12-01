@@ -36,7 +36,7 @@ export default {
 } ,
   data(){
     return {
-      dbUrl : "https://bom2321.thddns.net:7996/kaoshoes"
+      dbUrl : "https://bom2321.thddns.net:7997/kaoshoes"
     }
   },
   methods : {
