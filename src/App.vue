@@ -17,7 +17,6 @@ export default {
       brandUrl : `${this.dbUrl}/brand`,
       sizeUrl : `${this.dbUrl}/size`
     }
-    
   },
   watch:{
     $route (to){
@@ -36,7 +35,7 @@ export default {
 } ,
   data(){
     return {
-      dbUrl : "https://bom2321.thddns.net:7997/kaoshoes"
+      dbUrl : process.env.VUE_APP_Backend_URL + "/kaoshoes"
     }
   },
   methods : {
